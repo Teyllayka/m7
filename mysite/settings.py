@@ -26,14 +26,15 @@ SECRET_KEY = "django-insecure-4*56%vt)6lwkepz4*^6)z+n*#$qemu30&r=@^00zn2imp-^c6x
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["44db-89-18-221-184.ngrok-free.app"]
+ALLOWED_HOSTS = ["*"]
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://44db-89-18-221-184.ngrok-free.app',
+    'https://f7f5-77-219-9-162.ngrok-free.app',
     # Add other trusted origins if necessary
 ]
 
 # Application definition
+LOGOUT_REDIRECT_URL = '/'
 
 INSTALLED_APPS = [
     "website",
@@ -74,6 +75,11 @@ TEMPLATES = [
         },
     },
 ]
+
+
+LANGUAGE_CODE="ru"
+USE_I18N = True
+
 
 WSGI_APPLICATION = "mysite.wsgi.application"
 
