@@ -27,6 +27,136 @@
     <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&subset=latin,cyrillic" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/tilda-forms-1.0.min.css'%}" type="text/css" media="all" onerror="this.loaderr='y';" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alumni+Sans:wght@300;400;500;600;700&family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" type="text/css" />
+    
+    <style>
+      .form-group {
+        width:100%;
+      }
+
+      form input[type="text"], form input[type="date"]  {
+        color: rgb(0, 0, 0);
+        border: 1px solid rgb(207, 207, 207);
+        background-color: rgb(255, 255, 255);
+        border-radius: 7px;
+        font-size: 16px;
+        font-weight: 500;
+        height: 50px;
+        font-family: "Montserrat";
+        line-height: 1.33;
+        margin: 0;
+        outline: none;
+        padding: 0 20px;
+        width: 100%;
+        box-sizing: border-box;
+        margin-bottom: 20px;
+      }
+
+
+      form {
+        box-sizing: border-box;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        flex-direction: column;
+        width: 511px;
+
+      }
+
+      form label {
+        color: rgb(255, 255, 255);
+        font-family: Montserrat;
+        padding-bottom: 5px;
+        font-size: 18px;
+        font-weight: 600;
+      }
+
+      #id_car_type {
+        font-size: 14px;
+        font-weight: 400;
+        color: rgb(255, 255, 255);
+        font-family: Montserrat;
+      }
+
+
+
+      .form-container {
+        display: flex !important;
+        justify-content: center;
+        align-items: center;
+        padding: 25px 38.5px;
+        box-sizing: border-box;
+      }
+
+      .ppr-button {
+            position: relative; /* Confine pseudo-element to button */
+            z-index:1;
+            padding: 0px 15px;
+            display: block;
+            width: 200px;
+            font-weight: 700;
+            height: 50px;
+            color: #ffffff;
+            border-radius: 7px;
+            font-size: 15px;
+            font-family: Montserrat, sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: transparent; /* Remove default background */
+            border: 2px solid transparent; /* Initial border */
+            overflow: hidden; /* Contain pseudo-element */
+
+            
+        }
+
+        .ppr-button::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle at center, rgba(66, 66, 66, 1) 0%, rgba(0, 0, 0, 1) 100%);            border-radius: 7px; /* Match button's border-radius */
+            z-index: -1; /* Place behind button content */
+            transition: opacity 0.2s ease-in-out;
+            opacity: 1; /* Ensure it's visible */
+        }
+
+        .ppr-button::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle at center, rgba(123, 123, 123, 1) 0%, rgba(85, 85, 85, 1) 100%);    border-radius: 7px; /* Match button's border-radius */
+            z-index: -1; /* Place behind button content */
+            transition: opacity 0.2s ease-in-out;
+            opacity: 0; /* Ensure it's visible */
+        }
+
+
+        .ppr-button:hover::before {
+            opacity: 0; /* Slightly dim the background on hover */
+        }
+
+        .ppr-button:hover::after {
+            opacity: 1; /* Slightly dim the background on hover */
+        }
+
+    </style>
+
+    <!-- <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        document.getElementById('id_entry_date').addEventListener('blur', () => {
+          this.type = 'text';
+        });
+        document.getElementById('id_entry_date').addEventListener('focus', () => {
+          this.type = 'date';
+        });
+      })
+    </script> -->
+    
+    
     <script nomodule src="{% static 'js/tilda-polyfill-1.0.min.js'%}" charset="utf-8"></script>
     <script type="text/javascript">
       function t_onReady(func) {
@@ -2152,7 +2282,7 @@
               <div class='tn-atom' field='tn_text_1725430385884'>заказать пропуск для въезда на территорию</div>
             </div>
             <div class='t396__elem tn-elem tn-elem__7937162741725430528693' data-elem-id='1725430528693' data-elem-type='text' data-field-top-value="204" data-field-left-value="480" data-field-width-value="556" data-field-axisy-value="top" data-field-axisx-value="left" data-field-container-value="grid" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="" data-field-widthunits-value="px" data-field-top-res-320-value="215" data-field-width-res-320-value="320" data-field-top-res-480-value="199" data-field-left-res-480-value="0" data-field-width-res-480-value="480" data-field-top-res-640-value="224" data-field-left-res-640-value="31" data-field-width-res-640-value="581" data-field-top-res-960-value="196" data-field-left-res-960-value="-16" data-field-width-res-960-value="992">
-              <div class='tn-atom' field='tn_text_1725430528693'>Для заказа пропуска укажите государственный регистрационный номер транспортного средства:</div>
+              <div class='tn-atom' field='tn_text_1725430528693'>Для заказа пропуска на автомобиль заполните форму</div>
             </div>
             <div class='t396__elem tn-elem tn-elem__7937162741725430690767' data-elem-id='1725430690767' data-elem-type='text' data-field-top-value="48" data-field-left-value="45" data-field-width-value="258" data-field-axisy-value="top" data-field-axisx-value="left" data-field-container-value="grid" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="" data-field-widthunits-value="px" data-field-top-res-320-value="32" data-field-left-res-320-value="40" data-field-width-res-320-value="120" data-field-top-res-480-value="38" data-field-left-res-480-value="45" data-field-top-res-640-value="42" data-field-top-res-960-value="50" data-field-left-res-960-value="45" data-field-width-res-960-value="463">
               <div class='tn-atom' field='tn_text_1725430690767'>Личный кабинет для клиентов</div>
@@ -2180,7 +2310,22 @@
               <div class='tn-atom' field='tn_text_1726490709914'>Поддержка клиентов</div>
             </div>
             <div class='t396__elem tn-elem tn-elem__7937162741726491903087' data-elem-id='1726491903087' data-elem-type='shape' data-field-top-value="283" data-field-left-value="480" data-field-height-value="346" data-field-width-value="588" data-field-axisy-value="top" data-field-axisx-value="left" data-field-container-value="grid" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="px" data-field-widthunits-value="px" data-field-top-res-320-value="305" data-field-left-res-320-value="-25" data-field-height-res-320-value="327" data-field-top-res-480-value="267" data-field-left-res-480-value="55" data-field-height-res-480-value="323" data-field-width-res-480-value="370" data-field-top-res-640-value="293" data-field-left-res-640-value="26" data-field-top-res-960-value="240" data-field-left-res-960-value="187">
-              <div class='tn-atom'></div>
+              <div class='tn-atom form-container'>
+                <form method="POST">
+                  {% csrf_token %}
+                  <div class="form-group">
+                      {{ form.car_number }}
+                  </div>
+                  <div class="form-group">
+                      {{ form.car_type.label_tag }}
+                      {{ form.car_type }}
+                  </div>
+                  <div class="form-group">
+                      {{ form.entry_date }}
+                  </div>
+                  <button type="submit" class="ppr-button">ЗАКАЗАТЬ ПРОПУСК</button>
+                </form>
+              </div>
             </div>
             <div class='t396__elem tn-elem tn-elem__7937162741726490501842' data-elem-id='1726490501842' data-elem-type='form' data-field-top-value="308" data-field-left-value="515" data-field-width-value="511" data-field-axisy-value="top" data-field-axisx-value="left" data-field-container-value="grid" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="" data-field-widthunits-value="px" data-field-top-res-320-value="332" data-field-left-res-320-value="0" data-field-top-res-480-value="292" data-field-left-res-480-value="80" data-field-width-res-480-value="320" data-field-top-res-640-value="318" data-field-left-res-640-value="61" data-field-top-res-960-value="265" data-field-left-res-960-value="222" data-field-inputpos-value="v" data-field-inputfontfamily-value="Montserrat" data-field-fieldfontfamily-value="Montserrat" data-field-buttonhoverbgcolor-value="radial-gradient(circle at center,rgba(123,123,123,1) 0%,rgba(85,85,85,1) 100%)" data-field-buttonhoverbordercolor-value="#ffffff" data-field-inputfontsize-value="16" data-field-inputfontweight-value="500" data-field-inputcolor-value="#000000" data-field-inputbgcolor-value="#ffffff" data-field-inputbordercolor-value="#cfcfcf" data-field-inputbordersize-value="1" data-field-inputradius-value="7" data-field-inputheight-value="50" data-field-inputmargbottom-value="20" data-field-inputmargright-value="20" data-field-inputtitlefontsize-value="18" data-field-inputtitlefontweight-value="600" data-field-inputtitlecolor-value="#ffffff" data-field-inputtitlemargbottom-value="5" data-field-inputelscolor-value="#ffffff" data-field-inputelsfontweight-value="400" data-field-inputelsfontsize-value="14" data-field-buttontitle-value="ЗАКАЗАТЬ ПРОПУСК" data-field-buttoncolor-value="#ffffff" data-field-buttonbgcolor-value="radial-gradient(circle at center,rgba(66,66,66,1) 0%,rgba(0,0,0,1) 100%)" data-field-buttonbordersize-value="0" data-field-buttonradius-value="7" data-field-buttonwidth-value="250" data-field-buttonheight-value="50" data-field-buttonfontfamily-value="Montserrat" data-field-buttonfontsize-value="15" data-field-buttonfontweight-value="700" data-field-inputpos-res-480-value="v" data-field-inputmargbottom-res-480-value="10" data-field-inputtitlemargbottom-res-480-value="5" data-field-buttonalign-res-480-value="center" data-field-buttonwidth-res-480-value="320">
               <div class='tn-atom tn-atom__form'></div>

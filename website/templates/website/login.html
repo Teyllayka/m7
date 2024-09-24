@@ -93,64 +93,64 @@
             color: transparent;
         }
 
-.login-button {
-    position: relative; /* Confine pseudo-element to button */
-    padding: 0px 15px;
-    display: block;
-    width: 200px;
-    font-weight: 700;
-    height: 50px;
-    margin-left: auto;
-    margin-right: auto;
-    color: #ffffff;
-    border-radius: 7px;
-    font-size: 15px;
-    font-family: Montserrat, sans-serif;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    background: none; /* Remove default background */
-    border: 2px solid transparent; /* Initial border */
-    overflow: hidden; /* Contain pseudo-element */
-}
+        .login-button {
+            position: relative; /* Confine pseudo-element to button */
+            padding: 0px 15px;
+            display: block;
+            width: 200px;
+            font-weight: 700;
+            height: 50px;
+            margin-left: auto;
+            margin-right: auto;
+            color: #ffffff;
+            border-radius: 7px;
+            font-size: 15px;
+            font-family: Montserrat, sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: none; /* Remove default background */
+            border: 2px solid transparent; /* Initial border */
+            overflow: hidden; /* Contain pseudo-element */
+        }
 
-.login-button::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: radial-gradient(circle at center, rgba(255, 78, 0, 1) 0%, rgba(255, 0, 49, 1) 100%);
-    border-radius: 7px; /* Match button's border-radius */
-    z-index: -1; /* Place behind button content */
-    transition: opacity 0.2s ease-in-out;
-    opacity: 1; /* Ensure it's visible */
-}
+        .login-button::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle at center, rgba(255, 78, 0, 1) 0%, rgba(255, 0, 49, 1) 100%);
+            border-radius: 7px; /* Match button's border-radius */
+            z-index: -1; /* Place behind button content */
+            transition: opacity 0.2s ease-in-out;
+            opacity: 1; /* Ensure it's visible */
+        }
 
-.login-button::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: radial-gradient(circle at center, rgba(66, 66, 66, 1) 0%, rgba(0, 0, 0, 1) 100%);    border-radius: 7px; /* Match button's border-radius */
-    z-index: -1; /* Place behind button content */
-    transition: opacity 0.2s ease-in-out;
-    opacity: 0; /* Ensure it's visible */
-}
+        .login-button::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle at center, rgba(66, 66, 66, 1) 0%, rgba(0, 0, 0, 1) 100%);    border-radius: 7px; /* Match button's border-radius */
+            z-index: -1; /* Place behind button content */
+            transition: opacity 0.2s ease-in-out;
+            opacity: 0; /* Ensure it's visible */
+        }
 
-.login-button:hover {
-    border-color: #ffffff; /* Highlight border on hover */
-}
+        .login-button:hover {
+            border-color: #ffffff; /* Highlight border on hover */
+        }
 
-.login-button:hover::before {
-    opacity: 0; /* Slightly dim the background on hover */
-}
+        .login-button:hover::before {
+            opacity: 0; /* Slightly dim the background on hover */
+        }
 
-.login-button:hover::after {
-    opacity: 1; /* Slightly dim the background on hover */
-}
+        .login-button:hover::after {
+            opacity: 1; /* Slightly dim the background on hover */
+        }
 
 
 

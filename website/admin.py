@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import CustomUser
+from .models import CustomUser, PDFDocument
+from django.utils.html import format_html
 
 class CustomUserAdmin(UserAdmin):
     # Add username to fieldsets so admin can set it
@@ -21,3 +22,16 @@ class CustomUserAdmin(UserAdmin):
     ordering = ['pk']
 
 admin.site.register(CustomUser, CustomUserAdmin)
+
+
+@admin.register(PDFDocument)
+class PDFDocumentAdmin(admin.ModelAdmin):
+    list_display = ('title', 'uploaded_at', 'view_pdf')
+    search_fields = ('title',)
+
+    def view_pdf(self, obj):
+        if obj.pdf_file:
+            return format_html('<a href="{}" target="_blank">View PDF</a>', obj.pdf_file.url)
+        return "No PDF uploaded"
+
+    view_pdf.short_description = 'PDF File'

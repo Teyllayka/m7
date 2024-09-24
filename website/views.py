@@ -1,7 +1,9 @@
 from django.contrib.auth import login
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from .forms import PasswordOnlyAuthenticationForm
+
+from website.models import PDFDocument
+from .forms import CarPassForm, PasswordOnlyAuthenticationForm, SupportRequestForm
 
 def custom_login_view(request):
     if request.method == "POST":
@@ -33,8 +35,11 @@ def pvr(request):
     if not request.user.is_authenticated:
         return redirect('/')
 
+    pdf_document = PDFDocument.objects.filter(title='pvr').order_by('-uploaded_at').first()
+
     context = {
         'username': request.user.username if hasattr(request.user, 'username') else 'Anonymous',
+        'pdf_document': pdf_document,
     }
 
     return render(request, 'website/pvr.html', context)
@@ -45,36 +50,50 @@ def ppb(request):
     if not request.user.is_authenticated:
         return redirect('/')
 
+    pdf_document = PDFDocument.objects.filter(title='ppb').order_by('-uploaded_at').first()
+
     context = {
         'username': request.user.username if hasattr(request.user, 'username') else 'Anonymous',
+        'pdf_document': pdf_document,
     }
+    
 
     return render(request, 'website/ppb.html', context)
 
 
 def application(request):
+    if request.method == 'POST':
+        form = SupportRequestForm(request.POST)
+        if form.is_valid():
+            # Process the form data here
+            pass
 
     if not request.user.is_authenticated:
         return redirect('/')
 
     context = {
         'username': request.user.username if hasattr(request.user, 'username') else 'Anonymous',
+        'form': SupportRequestForm()  # Include form in the context
     }
 
     return render(request, 'website/application.html', context)
 
-
 def kpp(request):
+    if request.method == 'POST':
+        form = CarPassForm(request.POST)
+        if form.is_valid():
+            # Process the form data here
+            pass
+    else:
+        if not request.user.is_authenticated:
+            return redirect('/')
 
-    if not request.user.is_authenticated:
-        return redirect('/')
+        context = {
+            'username': request.user.username if hasattr(request.user, 'username') else 'Anonymous',
+            'form': CarPassForm()  # Include form in the context
+        }
 
-    context = {
-        'username': request.user.username if hasattr(request.user, 'username') else 'Anonymous',
-    }
-
-    return render(request, 'website/kpp.html', context)
-
+        return render(request, 'website/kpp.html', context)
 
 def calendar(request): 
 

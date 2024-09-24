@@ -3,6 +3,8 @@ from django.contrib import admin
 from django.urls import path, include
 from website import views  # Replace 'myapp' with the name of your app
 from django.contrib.auth import views as auth_views
+from django.conf.urls.static import static
+from django.conf import settings
 
 
 urlpatterns = [
@@ -15,6 +17,7 @@ urlpatterns = [
     path('kpp/', views.kpp, name="kpp"),
     path('kalendar/', views.calendar, name="calendar"),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
-
    
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -27,6 +27,133 @@
     <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&subset=latin,cyrillic" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/tilda-forms-1.0.min.css'%}" type="text/css" media="all" onerror="this.loaderr='y';" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alumni+Sans:wght@300;400;500;600;700&family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" type="text/css" />
+    <style>
+      .form-group {
+        width:100%;
+      }
+
+      form input[type="text"], form input[type="date"]  {
+        color: rgb(0, 0, 0);
+        border: 1px solid rgb(207, 207, 207);
+        background-color: rgb(255, 255, 255);
+        border-radius: 7px;
+        font-size: 16px;
+        font-weight: 500;
+        height: 50px;
+        font-family: "Montserrat";
+        line-height: 1.33;
+        margin: 0;
+        outline: none;
+        padding: 0 20px;
+        width: 100%;
+        box-sizing: border-box;
+        margin-bottom: 20px;
+      }
+
+
+      form {
+        box-sizing: border-box;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        flex-direction: column;
+        width: 100%;
+
+      }
+
+      form label {
+        color: rgb(255, 255, 255);
+        font-family: Montserrat;
+        padding-bottom: 5px;
+        font-size: 18px;
+        font-weight: 600;
+      }
+
+      #id_car_type {
+        font-size: 14px;
+        font-weight: 400;
+        color: rgb(255, 255, 255);
+        font-family: Montserrat;
+      }
+
+
+      textarea {
+        color: rgb(0, 0, 0);
+        border: 1px solid rgb(207, 207, 207);
+        background-color: rgb(255, 255, 255);
+        border-radius: 7px;
+        font-size: 16px;
+        font-weight: 500;
+        height: 85px;
+      }
+
+
+
+      .form-container {
+        display: flex !important;
+        justify-content: center;
+        align-items: center;
+        padding: 25px 38.5px;
+        box-sizing: border-box;
+      }
+
+      .ppr-button {
+            position: relative; /* Confine pseudo-element to button */
+            z-index:1;
+            padding: 0px 15px;
+            display: block;
+            width: 200px;
+            font-weight: 700;
+            height: 50px;
+            color: #ffffff;
+            border-radius: 7px;
+            font-size: 15px;
+            font-family: Montserrat, sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: transparent; /* Remove default background */
+            border: 2px solid transparent; /* Initial border */
+            overflow: hidden; /* Contain pseudo-element */
+
+            
+        }
+
+        .ppr-button::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle at center, rgba(66, 66, 66, 1) 0%, rgba(0, 0, 0, 1) 100%);            border-radius: 7px; /* Match button's border-radius */
+            z-index: -1; /* Place behind button content */
+            transition: opacity 0.2s ease-in-out;
+            opacity: 1; /* Ensure it's visible */
+        }
+
+        .ppr-button::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle at center, rgba(123, 123, 123, 1) 0%, rgba(85, 85, 85, 1) 100%);    border-radius: 7px; /* Match button's border-radius */
+            z-index: -1; /* Place behind button content */
+            transition: opacity 0.2s ease-in-out;
+            opacity: 0; /* Ensure it's visible */
+        }
+
+
+        .ppr-button:hover::before {
+            opacity: 0; /* Slightly dim the background on hover */
+        }
+
+        .ppr-button:hover::after {
+            opacity: 1; /* Slightly dim the background on hover */
+        }
+
+    </style>
     <script nomodule src="{% static 'js/tilda-polyfill-1.0.min.js'%}" charset="utf-8"></script>
     <script type="text/javascript">
       function t_onReady(func) {
@@ -94,8 +221,7 @@
         return l
       }
     </script>
-    <script src="{% static 'js/jquery-1.10.2.min.js' %}" charset="utf-8" onerror="this.loaderr='y';"></script>
-    <script src="{% static 'js/tilda-scripts-3.0.min.js' %}" charset="utf-8" defer onerror="this.loaderr='y';"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{% static 'js/application.js' %}" charset="utf-8" async onerror="this.loaderr='y';"></script>
     <script src="{% static 'js/lazyload-1.3.min.export.js' %}" charset="utf-8" async onerror="this.loaderr='y';"></script>
     <script src="{% static 'js/tilda-zero-1.1.min.js' %}" charset="utf-8" async onerror="this.loaderr='y';"></script>
@@ -103,6 +229,33 @@
     <script src="{% static 'js/tilda-zero-scale-1.0.min.js' %}" charset="utf-8" async onerror="this.loaderr='y';"></script>
     <script src="{% static 'js/tilda-skiplink-1.0.min.js' %}" charset="utf-8" async onerror="this.loaderr='y';"></script>
     <script src="{% static 'js/tilda-events-1.0.min.js' %}" charset="utf-8" async onerror="this.loaderr='y';"></script>
+    <script src="https://cdn.jsdelivr.net/npm/cleave.js@1.6.0/dist/cleave.min.js"></script>
+
+    <script>
+      $(document).ready(function(){
+          var cleave = new Cleave('#id_phone_number', {
+              prefix: '+7',
+              delimiters: [' (', ') ', '-', '-'],
+              blocks: [2, 3,3,2,2],
+              numericOnly: true,
+              noImmediatePrefix: false,
+              rawValueTrimPrefix: true
+          });
+      
+          // Prevent the deletion of the '+7' prefix
+          $('#id_phone_number').on('keydown', function(e) {
+              var caretPosition = this.selectionStart;
+              if (caretPosition <= 2 && (e.keyCode === 8 || e.keyCode === 46)) {
+                  e.preventDefault();
+              }
+            console.log(caretPosition, e.keyCode)
+
+          });
+      });
+      </script>
+      
+      
+
     <script type="text/javascript">
       window.dataLayer = window.dataLayer || [];
     </script>
@@ -2197,7 +2350,24 @@
               </div>
             </div>
             <div class='t396__elem tn-elem tn-elem__7989224571726491903087' data-elem-id='1726491903087' data-elem-type='shape' data-field-top-value="283" data-field-left-value="480" data-field-height-value="357" data-field-width-value="720" data-field-axisy-value="top" data-field-axisx-value="left" data-field-container-value="grid" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="px" data-field-widthunits-value="px" data-field-top-res-320-value="334" data-field-left-res-320-value="-25" data-field-height-res-320-value="318" data-field-width-res-320-value="370" data-field-top-res-480-value="287" data-field-left-res-480-value="0" data-field-height-res-480-value="342" data-field-width-res-480-value="480" data-field-top-res-640-value="312" data-field-left-res-640-value="0" data-field-height-res-640-value="364" data-field-width-res-640-value="640" data-field-top-res-960-value="252" data-field-left-res-960-value="120">
-              <div class='tn-atom'></div>
+              <div class='tn-atom form-container'>
+                <form method="POST">
+                  {% csrf_token %}
+                  <div class="form-group">
+                      {{ form.contact_name.label_tag }}
+                      {{ form.contact_name }}
+                  </div>
+                  <div class="form-group">
+                      {{ form.phone_number.label_tag }}
+                      {{ form.phone_number }}
+                  </div>
+                  <div class="form-group">
+                      {{ form.message.label_tag }}
+                      {{ form.message }}
+                  </div>
+                  <button type="submit" class="ppr-button">ПОДАТЬ ЗАЯВКУ</button>
+                </form>
+              </div>
             </div>
             <div class='t396__elem tn-elem tn-elem__7989224571726490501842' data-elem-id='1726490501842' data-elem-type='form' data-field-top-value="318" data-field-left-value="515" data-field-width-value="657" data-field-axisy-value="top" data-field-axisx-value="left" data-field-container-value="grid" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="" data-field-widthunits-value="px" data-field-top-res-320-value="359" data-field-left-res-320-value="0" data-field-width-res-320-value="320" data-field-top-res-480-value="312" data-field-left-res-480-value="13" data-field-width-res-480-value="454" data-field-top-res-640-value="337" data-field-left-res-640-value="36" data-field-width-res-640-value="568" data-field-top-res-960-value="277" data-field-left-res-960-value="152" data-field-inputpos-value="v" data-field-inputfontfamily-value="Montserrat" data-field-fieldfontfamily-value="Montserrat" data-field-buttonhoverbgcolor-value="radial-gradient(circle at center,rgba(123,123,123,1) 0%,rgba(85,85,85,1) 100%)" data-field-buttonhoverbordercolor-value="#ffffff" data-field-inputfontsize-value="16" data-field-inputfontweight-value="500" data-field-inputcolor-value="#000000" data-field-inputbgcolor-value="#ffffff" data-field-inputbordercolor-value="#cfcfcf" data-field-inputbordersize-value="1" data-field-inputradius-value="7" data-field-inputheight-value="50" data-field-inputmargbottom-value="20" data-field-inputmargright-value="20" data-field-inputtitlefontsize-value="18" data-field-inputtitlefontweight-value="400" data-field-inputtitlecolor-value="#000000" data-field-inputtitlemargbottom-value="5" data-field-inputelsfontweight-value="400" data-field-inputelsfontsize-value="14" data-field-buttontitle-value="ПОДАТЬ ЗАЯВКУ" data-field-buttonalign-value="center" data-field-buttoncolor-value="#ffffff" data-field-buttonbgcolor-value="radial-gradient(circle at center,rgba(66,66,66,1) 0%,rgba(0,0,0,1) 100%)" data-field-buttonbordersize-value="0" data-field-buttonradius-value="7" data-field-buttonwidth-value="250" data-field-buttonheight-value="50" data-field-buttonfontfamily-value="Montserrat" data-field-buttonfontsize-value="15" data-field-buttonfontweight-value="700" data-field-inputpos-res-480-value="v" data-field-inputmargbottom-res-480-value="10" data-field-inputtitlemargbottom-res-480-value="5" data-field-buttonalign-res-480-value="center" data-field-buttonwidth-res-480-value="320">
               <div class='tn-atom tn-atom__form'></div>
