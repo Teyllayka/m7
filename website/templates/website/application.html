@@ -55,10 +55,9 @@
         box-sizing: border-box;
         display: flex;
         justify-content: center;
-        align-items: flex-start;
+        align-items: center;
         flex-direction: column;
         width: 100%;
-
       }
 
       form label {
@@ -82,12 +81,16 @@
         border: 1px solid rgb(207, 207, 207);
         background-color: rgb(255, 255, 255);
         border-radius: 7px;
+        font-family: "Montserrat";
         font-size: 16px;
         font-weight: 500;
         height: 85px;
+        padding: 10px 20px;
+        outline: none;
+        width: 100%;
+        box-sizing: border-box;
+        margin-bottom: 20px;
       }
-
-
 
       .form-container {
         display: flex !important;
@@ -114,8 +117,6 @@
             background: transparent; /* Remove default background */
             border: 2px solid transparent; /* Initial border */
             overflow: hidden; /* Contain pseudo-element */
-
-            
         }
 
         .ppr-button::before {
@@ -2354,15 +2355,12 @@
                 <form method="POST">
                   {% csrf_token %}
                   <div class="form-group">
-                      {{ form.contact_name.label_tag }}
                       {{ form.contact_name }}
                   </div>
                   <div class="form-group">
-                      {{ form.phone_number.label_tag }}
                       {{ form.phone_number }}
                   </div>
                   <div class="form-group">
-                      {{ form.message.label_tag }}
                       {{ form.message }}
                   </div>
                   <button type="submit" class="ppr-button">ПОДАТЬ ЗАЯВКУ</button>

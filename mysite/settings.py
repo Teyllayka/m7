@@ -29,23 +29,22 @@ DEBUG = True
 ALLOWED_HOSTS = ["*"]
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://f7f5-77-219-9-162.ngrok-free.app',
+    "https://f7f5-77-219-9-162.ngrok-free.app",
+    "https://e9d0-94-30-157-106.ngrok-free.app",
     # Add other trusted origins if necessary
 ]
 
 # Application definition
-LOGOUT_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = "/"
 
 INSTALLED_APPS = [
     "website",
-
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    
 ]
 
 MIDDLEWARE = [
@@ -77,14 +76,14 @@ TEMPLATES = [
 ]
 
 
-LANGUAGE_CODE="ru"
+LANGUAGE_CODE = "ru"
 USE_I18N = True
 
 
 WSGI_APPLICATION = "mysite.wsgi.application"
 
 # mysite/settings.py
-AUTH_USER_MODEL = 'website.CustomUser'
+AUTH_USER_MODEL = "website.CustomUser"
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
@@ -131,15 +130,15 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = "/static/"
 
 # Define where Django will look for static files in development
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, "static"),
 ]
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 
 # Default primary key field type
