@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth import authenticate
 from django.core.exceptions import ValidationError
 from website.models import CustomUser
+from datetime import datetime
 
 
 class PasswordOnlyAuthenticationForm(forms.Form):
@@ -12,6 +13,9 @@ class PasswordOnlyAuthenticationForm(forms.Form):
                 "placeholder": "Введите ваш пароль",
             }
         ),
+        error_messages={
+            "required": "Поле пароля не может быть пустым.",
+        },
     )
 
     def clean(self):
@@ -28,9 +32,12 @@ class PasswordOnlyAuthenticationForm(forms.Form):
 
 
 class CarPassForm(forms.Form):
+    today = datetime.today()
+    formatted_date = today.strftime("%Y-%m-%d")
+
     CAR_TYPE_CHOICES = [
-        ("легковой", "Легковой"),
-        ("грузовой", "Грузовой"),
+        ("8", "Легковой"),
+        ("10", "Грузовой"),
     ]
 
     car_number = forms.CharField(
@@ -51,8 +58,10 @@ class CarPassForm(forms.Form):
         widget=forms.DateInput(
             attrs={
                 "class": "form-control",
+                "id": "date",
                 "placeholder": "Дата заезда",
                 "type": "date",
+                "min": formatted_date,
             }
         ),
     )

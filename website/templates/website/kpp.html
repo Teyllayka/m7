@@ -108,10 +108,19 @@
         color: transparent;
       }
 
+      input[type="date"]:invalid:focus {
+        color: #000000;
+      }
+
       input[type="date"]:invalid:before {
         position: absolute;
         content: "Дата заезда";
         color: #000000;
+      }
+
+      input[type="date"]:focus:before {
+        position: absolute;
+        content: "";
       }
 
       input[type="radio"] {

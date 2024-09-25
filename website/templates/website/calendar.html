@@ -25,6 +25,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&subset=latin,cyrillic" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alumni+Sans:wght@300;400;500;600;700&family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/ru.js"></script>
     <script nomodule src="{% static 'js/tilda-polyfill-1.0.min.js'%}" charset="utf-8"></script>
     <script type="text/javascript">
       function t_onReady(func) {
@@ -135,6 +138,13 @@
       <div id="rec798928392" class="r t-rec" data-animationappear="off" data-record-type="396">
         <!-- T396 -->
         <style>
+          .tn-elem__7989283921725430385884 {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+          }
+
           #rec798928392 .t396__artboard {
             height: 740px;
             background-color: #f2f2f2;
@@ -1976,6 +1986,18 @@
             </div>
             <div class='t396__elem tn-elem tn-elem__7989283921725430385884' data-elem-id='1725430385884' data-elem-type='text' data-field-top-value="124" data-field-left-value="480" data-field-width-value="697" data-field-axisy-value="top" data-field-axisx-value="left" data-field-container-value="grid" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="" data-field-widthunits-value="px" data-field-top-res-320-value="147" data-field-left-res-320-value="0" data-field-width-res-320-value="320" data-field-top-res-480-value="167" data-field-left-res-480-value="47" data-field-width-res-480-value="386" data-field-top-res-640-value="167" data-field-left-res-640-value="39" data-field-width-res-640-value="562" data-field-top-res-960-value="144" data-field-left-res-960-value="0" data-field-width-res-960-value="960">
               <div class='tn-atom' field='tn_text_1725430385884'>Календарь мероприятий</div>
+              <div id="calendar"></div>
+              <script>
+                  flatpickr("#calendar", {
+                      locale: "ru",
+                      dateFormat: "d.m.Y",
+                      inline: true,
+                      onChange: function(selectedDates, dateStr, instance) {
+                          console.log("Выбранная дата:", dateStr);
+                          alert("Вы выбрали дату: " + dateStr);
+                      }
+                  });
+              </script>
             </div>
             <div class='t396__elem tn-elem tn-elem__7989283921725430979487' data-elem-id='1725430979487' data-elem-type='text' data-field-top-value="26" data-field-left-value="521" data-field-width-value="333" data-field-axisy-value="top" data-field-axisx-value="left" data-field-container-value="grid" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="" data-field-widthunits-value="px" data-field-top-res-640-value="-211" data-field-left-res-640-value="551" data-field-top-res-960-value="25" data-field-left-res-960-value="316" data-field-width-res-960-value="191">
               <div class='tn-atom' field='tn_text_1725430979487'>+7 (485) 555-05-50</div>

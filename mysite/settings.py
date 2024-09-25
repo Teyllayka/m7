@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ["*"]
 CSRF_TRUSTED_ORIGINS = [
     "https://f7f5-77-219-9-162.ngrok-free.app",
     "https://e9d0-94-30-157-106.ngrok-free.app",
+    "https://6531-83-99-252-208.ngrok-free.app",
     # Add other trusted origins if necessary
 ]
 

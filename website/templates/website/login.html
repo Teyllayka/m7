@@ -50,15 +50,31 @@
 
         @media screen and (max-width: 479px) {
             .form {
-                top: 170px !important;
+                top: 130px !important;
                 left: calc(50% - 160px) !important;
                 width: 320px !important;
+            }
+
+            .tn-elem__7988399431725431692952 {
+              top: 88px !important;
+            }
+
+            .tn-elem__7988399431725426817408 {
+              top: 16px !important;
+            }
+
+            .tn-elem__7988399431726488819687 {
+              top: 24px !important;
+            }
+
+            .tn-elem__7988399431726488835212 {
+              top: 53px !important
             }
         }
 
         .errorlist li {
           font-family: "Montserrat";
-          font-size: 16px;
+          font-size: 12px;
           font-weight: 500;
           color: red;
         }
@@ -95,7 +111,6 @@
                 width: 100%;
                 font-family: "Montserrat";
         }
-
         .form input:focus::placeholder {
             color: transparent;
         }
@@ -1171,7 +1186,7 @@
                     <div class='t396__elem tn-elem tn-elem__7988399431725431692952' data-elem-id='1725431692952' data-elem-type='text' data-field-top-value="193" data-field-left-value="279" data-field-width-value="640" data-field-axisy-value="top" data-field-axisx-value="left" data-field-container-value="grid" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="" data-field-widthunits-value="px" data-field-top-res-320-value="128" data-field-left-res-320-value="0" data-field-width-res-320-value="320" data-field-top-res-480-value="168" data-field-left-res-480-value="-80" data-field-left-res-640-value="-1" data-field-left-res-960-value="160">
                         <div class='tn-atom' field='tn_text_1725431692952'>вход в личный кабинет</div>
                     </div>
-                    <form method="post" class="form">
+                    <form method="post" class="form" novalidate>
                         {% csrf_token %}
                         {{ form.as_p }}
                         <button class="t-submit tn-form__submit-gradient login-button" type="submit">ВОЙТИ</button>

@@ -1,6 +1,7 @@
 from django.contrib.auth import login
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
+import requests
 
 from website.models import PDFDocument
 from .forms import CarPassForm, PasswordOnlyAuthenticationForm, SupportRequestForm
@@ -72,9 +73,40 @@ def ppb(request):
 
 def application(request):
     if request.method == "POST":
+
+        # print(
+        #     data["phone_number"]
+        #     .replace(" ", "")
+        #     .replace("(", "")
+        #     .replace(")", "")
+        #     .replace("-", "")
+        # )
+
         form = SupportRequestForm(request.POST)
         if form.is_valid():
-            # Process the form data here
+            data = request.POST
+
+            params = {
+                "key": "at9DgisOQMiBxKS4V1HA5RXmTgl4D6v2aLsIb6ge",
+                "username": "tech",
+                "password": "!tech@2024",
+                "action": "insert",
+                "entity_id": 33,
+                "items[field_330]": data["contact_name"],
+                "items[field_331]": data["phone_number"],
+                "items[field_324]": data["message"],
+                "items[parent_item_id]": "1",
+            }
+
+            url = "https://vvvgroup.ru/ts/api/rest.php"
+            try:
+                response = requests.post(url, data=params, timeout=10, verify=False)
+                response.raise_for_status()  # Raise an exception for HTTP errors
+                result = response.json()
+                print(result)  # Or handle the result as needed
+            except requests.exceptions.RequestException as e:
+                print(f"An error occurred: {e}")
+
             pass
 
     if not request.user.is_authenticated:
@@ -92,9 +124,33 @@ def application(request):
 
 def kpp(request):
     if request.method == "POST":
+        print(request.POST)
         form = CarPassForm(request.POST)
         if form.is_valid():
-            # Process the form data here
+            data = request.POST
+
+            params = {
+                "key": "at9DgisOQMiBxKS4V1HA5RXmTgl4D6v2aLsIb6ge",
+                "username": "tech",
+                "password": "!tech@2024",
+                "action": "insert",
+                "entity_id": 31,
+                "items[field_295]": request.user.username,
+                "items[field_296]": data["car_number"],
+                "items[field_297]": data["car_type"],
+                "items[field_298]": data["entry_date"],
+                "items[parent_item_id]": "1",
+            }
+
+            url = "https://vvvgroup.ru/ts/api/rest.php"
+            try:
+                response = requests.post(url, data=params, timeout=10, verify=False)
+                response.raise_for_status()  # Raise an exception for HTTP errors
+                result = response.json()
+                print(result)  # Or handle the result as needed
+            except requests.exceptions.RequestException as e:
+                print(f"An error occurred: {e}")
+
             pass
     else:
         if not request.user.is_authenticated:
