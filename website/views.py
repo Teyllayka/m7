@@ -1,5 +1,5 @@
 from django.contrib.auth import login
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 import requests
 
@@ -14,6 +14,12 @@ def custom_login_view(request):
             user = form.cleaned_data["user"]
             login(request, user)
             return redirect("pvr")
+        
+        
+        errors = form.errors.get_json_data()
+        print(errors)
+        return JsonResponse({'success': False, 'errors': errors}, status=200)
+
     else:
         if request.user.is_authenticated:
             return redirect("pvr")
