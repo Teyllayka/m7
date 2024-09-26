@@ -224,6 +224,8 @@
 
     </style>
 
+    <script src="https://cdn.jsdelivr.net/npm/@simondmc/popup-js@1.4.3/popup.min.js"></script>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('myform').addEventListener('submit', async function(e) {
@@ -242,7 +244,11 @@
             })
             .then(response => response.json()).then(data => {
                 if (data.success) {
-                  console.log("cool!");
+                  const myPopup = new Popup({
+                      id: "my-popup",
+                      title: "Заявка успешно отправлена",
+                      content: ` `,
+                  }).show();
                 }             
             });
         });

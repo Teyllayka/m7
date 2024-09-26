@@ -175,13 +175,10 @@
             })
             .then(response => response.json()).then(data => {
                 if (data.success) {
-                  console.log("cool!");
                   const myPopup = new Popup({
                       id: "my-popup",
-                      title: "My First Popup",
-                      content: `
-                          An example popup.
-                          Supports multiple lines.`,
+                      title: "Заявка успешно отправлена",
+                      content: ` `,
                   }).show();
                 }             
             });
