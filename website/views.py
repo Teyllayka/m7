@@ -3,7 +3,7 @@ from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 import requests
 
-from website.models import PDFDocument
+from website.models import PDFDocument, Post
 from .forms import CarPassForm, PasswordOnlyAuthenticationForm, SupportRequestForm
 
 
@@ -187,10 +187,14 @@ def calendar(request):
     if not request.user.is_authenticated:
         return redirect("/")
 
+
+    posts = Post.objects.all()
+
     context = {
         "username": (
             request.user.username if hasattr(request.user, "username") else "Anonymous"
         ),
+        "posts": posts,
     }
 
     return render(request, "website/calendar.html", context)

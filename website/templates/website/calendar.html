@@ -2090,6 +2090,22 @@
             <div class='t396__elem tn-elem tn-elem__7989283921727088598632' data-elem-id='1727088598632' data-elem-type='button' data-field-top-value="641" data-field-left-value="276" data-field-height-value="19" data-field-width-value="146" data-field-axisy-value="top" data-field-axisx-value="left" data-field-container-value="grid" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="px" data-field-widthunits-value="px" data-field-top-res-320-value="683" data-field-left-res-320-value="173" data-field-top-res-480-value="657" data-field-left-res-480-value="327" data-field-top-res-640-value="699" data-field-left-res-640-value="320" data-field-top-res-960-value="637" data-field-left-res-960-value="309">
               <a class='tn-atom' href="/pvr">Вернуться на главную</a>
             </div>
+            {% if posts %}
+                <ul>
+                    {% for post in posts %}
+                        <li>
+                            <h2>{{ post.title }}</h2>
+                            {% if post.photo %}
+                                <img src="{{ post.photo.url }}" alt="{{ post.title }}" style="max-width:200px; height:auto;">
+                            {% endif %}
+                            <p>{{ post.content }}</p>
+                            <p><strong>Published on:</strong> {{ post.published_at }}</p>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No posts available.</p>
+            {% endif %}
           </div>
         </div>
         <script>

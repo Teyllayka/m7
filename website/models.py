@@ -45,5 +45,6 @@ class Post(models.Model):
     title = models.CharField(max_length=255)
     content = models.TextField()
     photo = models.ImageField(upload_to='photos/', null=True, blank=True)
+    published_at = models.DateField(null=True, blank=True)  # Allows date selection only
 
    

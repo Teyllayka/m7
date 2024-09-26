@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import CustomUser, PDFDocument
+from .models import CustomUser, PDFDocument, Post
 from django.utils.html import format_html
 
 class CustomUserAdmin(UserAdmin):
@@ -35,3 +35,17 @@ class PDFDocumentAdmin(admin.ModelAdmin):
         return "No PDF uploaded"
 
     view_pdf.short_description = 'PDF File'
+
+@admin.register(Post)
+class PostAdmin(admin.ModelAdmin):
+    list_display = ('title', 'published_at', 'photo')  # Include published_at in the list view
+    search_fields = ('title', 'content')  # Allow searching by title and content
+    list_filter = ('published_at',)  # Filter options by publish date
+    ordering = ('-published_at',)  # Order posts by most recent publish date
+
+    # Optional: if you want to show date widget when editing/creating a post in the admin
+    fieldsets = (
+        (None, {
+            'fields': ('title', 'content', 'photo', 'published_at'),
+        }),
+    )
