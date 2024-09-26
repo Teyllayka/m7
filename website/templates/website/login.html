@@ -1053,42 +1053,48 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('myform').addEventListener('submit', async function(e) {
-            e.preventDefault();  // Prevent the form from submitting the default way
-            
-            const form = e.target;
-            const formData = new FormData(form);
-            const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+                e.preventDefault();  // Prevent the form from submitting the default way
+                
+                const form = e.target;
+                const formData = new FormData(form);
+                const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
     
-            fetch("{% url 'login' %}", {
-                method: "POST",
-                headers: {
-                    'X-CSRFToken': csrfToken,
-                },
-                body: formData,
-            })
-            .then(response => response.json()).then(data => {
-                if (!data.success) {
-                    const errors = data.errors;
-                    const ul = document.createElement('ul');
-                    ul.classList.add('errorlist');
-
-                    for (let field in errors) {
-                        errors[field].forEach(error => {
-                            const li = document.createElement('li');
-                            li.textContent = error.message;
-                            ul.appendChild(li);
-                        });
+                fetch("{% url 'login' %}", {
+                    method: "POST",
+                    headers: {
+                        'X-CSRFToken': csrfToken,
+                    },
+                    body: formData,
+                })
+                .then(response => response.json()).then(data => {
+                    // Check if there's an existing error list and remove it
+                    const existingErrorList = form.querySelector('.errorlist');
+                    if (existingErrorList) {
+                        existingErrorList.remove();
                     }
-
-                    form.prepend(ul);
-                } else {
-                  location.reload();
-                }
+    
+                    if (!data.success) {
+                        const errors = data.errors;
+                        const ul = document.createElement('ul');
+                        ul.classList.add('errorlist');
+    
+                        for (let field in errors) {
+                            errors[field].forEach(error => {
+                                const li = document.createElement('li');
+                                li.textContent = error.message;
+                                ul.appendChild(li);
+                            });
+                        }
+    
+                        form.prepend(ul);
+                    } else {
+                      location.reload();
+                    }
+                });
             });
         });
-        });
-        
     </script>
+    
     <script type="text/javascript">
         function t_onReady(func) {
             if (document.readyState != 'loading') {
