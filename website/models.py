@@ -39,3 +39,11 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.username
+
+
+class Post(models.Model):
+    title = models.CharField(max_length=255)
+    content = models.TextField()
+    photo = models.ImageField(upload_to='photos/', null=True, blank=True)
+
+   
