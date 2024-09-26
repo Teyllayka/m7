@@ -70,14 +70,23 @@ AUTH_USER_MODEL = "website.CustomUser"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'verceldb',
+        'USER': 'default',
+        'PASSWORD': 'Z0v7BOwyogPC',
+        'HOST': 'ep-steep-brook-a2dsj6wx-pooler.eu-central-1.aws.neon.tech',
+        'PORT': '5432',
     }
 }
 
+PASSWORD_HASHERS = [
+    'django.contrib.auth.hashers.Argon2PasswordHasher',  # Use Argon2 as the default hasher
+    'django.contrib.auth.hashers.PBKDF2PasswordHasher',  # Fallback to PBKDF2
+    'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
+    'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
+    'django.contrib.auth.hashers.BCryptPasswordHasher',
+]
 
-# Password validation
-# https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
