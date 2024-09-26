@@ -70,12 +70,8 @@ AUTH_USER_MODEL = "website.CustomUser"
 
 DATABASES = {
     "default": {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'verceldb',
-        'USER': 'default',
-        'PASSWORD': 'Z0v7BOwyogPC',
-        'HOST': 'ep-steep-brook-a2dsj6wx-pooler.eu-central-1.aws.neon.tech',
-        'PORT': '5432',
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
     }
 }
 
@@ -119,18 +115,15 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
+STATIC_URL = "/static/"
 
-STATIC_URL = '/static/'
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'mysite', 'static'),
-)
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# Define where Django will look for static files in development
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
 
 MEDIA_URL = "/media/"
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'mysite', 'media'),
-)
-MEDIA_ROOT = os.path.join(BASE_DIR, "mediafiles")
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 
 # Default primary key field type
