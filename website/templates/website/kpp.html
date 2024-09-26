@@ -224,6 +224,32 @@
 
     </style>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('myform').addEventListener('submit', async function(e) {
+            e.preventDefault();  // Prevent the form from submitting the default way
+            
+            const form = e.target;
+            const formData = new FormData(form);
+            const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    
+            fetch("{% url 'kpp' %}", {
+                method: "POST",
+                headers: {
+                    'X-CSRFToken': csrfToken,
+                },
+                body: formData,
+            })
+            .then(response => response.json()).then(data => {
+                if (data.success) {
+                  console.log("cool!");
+                }             
+            });
+        });
+        });
+        
+    </script>
+
     <!-- <script>
       document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('id_entry_date').addEventListener('blur', () => {
@@ -2390,7 +2416,7 @@
             </div>
             <div class='t396__elem tn-elem tn-elem__7937162741726491903087' data-elem-id='1726491903087' data-elem-type='shape' data-field-top-value="283" data-field-left-value="480" data-field-height-value="346" data-field-width-value="588" data-field-axisy-value="top" data-field-axisx-value="left" data-field-container-value="grid" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="px" data-field-widthunits-value="px" data-field-top-res-320-value="305" data-field-left-res-320-value="-25" data-field-height-res-320-value="327" data-field-top-res-480-value="267" data-field-left-res-480-value="55" data-field-height-res-480-value="323" data-field-width-res-480-value="370" data-field-top-res-640-value="293" data-field-left-res-640-value="26" data-field-top-res-960-value="240" data-field-left-res-960-value="187">
               <div class='tn-atom form-container'>
-                <form method="POST">
+                <form id="myform" method="POST">
                   {% csrf_token %}
                   <div class="form-group">
                       {{ form.car_number }}

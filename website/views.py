@@ -13,12 +13,11 @@ def custom_login_view(request):
         if form.is_valid():
             user = form.cleaned_data["user"]
             login(request, user)
-            return redirect("pvr")
-        
-        
+            return JsonResponse({"success": True}, status=200)
+
         errors = form.errors.get_json_data()
         print(errors)
-        return JsonResponse({'success': False, 'errors': errors}, status=200)
+        return JsonResponse({"success": False, "errors": errors}, status=200)
 
     else:
         if request.user.is_authenticated:
@@ -110,8 +109,13 @@ def application(request):
                 response.raise_for_status()  # Raise an exception for HTTP errors
                 result = response.json()
                 print(result)  # Or handle the result as needed
+                return JsonResponse({"success": True}, status=200)
+
             except requests.exceptions.RequestException as e:
                 print(f"An error occurred: {e}")
+                errors = form.errors.get_json_data()
+                print(errors)
+                return JsonResponse({"success": False, "errors": errors}, status=200)
 
             pass
 
@@ -154,8 +158,12 @@ def kpp(request):
                 response.raise_for_status()  # Raise an exception for HTTP errors
                 result = response.json()
                 print(result)  # Or handle the result as needed
+                return JsonResponse({"success": True}, status=200)
             except requests.exceptions.RequestException as e:
                 print(f"An error occurred: {e}")
+                errors = form.errors.get_json_data()
+                print(errors)
+                return JsonResponse({"success": False, "errors": errors}, status=200)
 
             pass
     else:

@@ -155,6 +155,41 @@
         }
 
     </style>
+
+    <script src="https://cdn.jsdelivr.net/npm/@simondmc/popup-js@1.4.3/popup.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('myform').addEventListener('submit', async function(e) {
+            e.preventDefault();  // Prevent the form from submitting the default way
+            
+            const form = e.target;
+            const formData = new FormData(form);
+            const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    
+            fetch("{% url 'application' %}", {
+                method: "POST",
+                headers: {
+                    'X-CSRFToken': csrfToken,
+                },
+                body: formData,
+            })
+            .then(response => response.json()).then(data => {
+                if (data.success) {
+                  console.log("cool!");
+                  const myPopup = new Popup({
+                      id: "my-popup",
+                      title: "My First Popup",
+                      content: `
+                          An example popup.
+                          Supports multiple lines.`,
+                  }).show();
+                }             
+            });
+        });
+        });
+        
+    </script>
+
     <script nomodule src="{% static 'js/tilda-polyfill-1.0.min.js'%}" charset="utf-8"></script>
     <script type="text/javascript">
       function t_onReady(func) {
@@ -2352,7 +2387,7 @@
             </div>
             <div class='t396__elem tn-elem tn-elem__7989224571726491903087' data-elem-id='1726491903087' data-elem-type='shape' data-field-top-value="283" data-field-left-value="480" data-field-height-value="357" data-field-width-value="720" data-field-axisy-value="top" data-field-axisx-value="left" data-field-container-value="grid" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="px" data-field-widthunits-value="px" data-field-top-res-320-value="334" data-field-left-res-320-value="-25" data-field-height-res-320-value="318" data-field-width-res-320-value="370" data-field-top-res-480-value="287" data-field-left-res-480-value="0" data-field-height-res-480-value="342" data-field-width-res-480-value="480" data-field-top-res-640-value="312" data-field-left-res-640-value="0" data-field-height-res-640-value="364" data-field-width-res-640-value="640" data-field-top-res-960-value="252" data-field-left-res-960-value="120">
               <div class='tn-atom form-container'>
-                <form method="POST">
+                <form id="myform" method="POST">
                   {% csrf_token %}
                   <div class="form-group">
                       {{ form.contact_name }}

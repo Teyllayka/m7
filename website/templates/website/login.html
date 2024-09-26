@@ -1067,9 +1067,24 @@
                 body: formData,
             })
             .then(response => response.json()).then(data => {
-                console.log(data);
-            })
-            
+                if (!data.success) {
+                    const errors = data.errors;
+                    const ul = document.createElement('ul');
+                    ul.classList.add('errorlist');
+
+                    for (let field in errors) {
+                        errors[field].forEach(error => {
+                            const li = document.createElement('li');
+                            li.textContent = error.message;
+                            ul.appendChild(li);
+                        });
+                    }
+
+                    form.prepend(ul);
+                } else {
+                  location.reload();
+                }
+            });
         });
         });
         
