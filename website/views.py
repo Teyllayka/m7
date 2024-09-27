@@ -195,7 +195,7 @@ def calendar(request):
         )
 
 
-   
+
 
     context = {
         "username": (
