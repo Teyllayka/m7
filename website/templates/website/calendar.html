@@ -1767,17 +1767,20 @@
               <div id="calendar"></div>
               <script src="https://cdn.jsdelivr.net/npm/@simondmc/popup-js@1.4.3/popup.min.js"></script>
               <script>
-                  console.log("{{csrf_token}}");
+                  let posts;
+                  const fill = async () => {
+                   
+                    
+                    let response = await fetch('/kalendar/', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            "X-CSRFToken": "{{ csrf_token }}"  // Ensure CSRF token is included
 
-                  const fill = () => {
-                  const posts = fetch('/kalendar/', {
-                      method: 'POST',
-                      headers: {
-                          'Content-Type': 'application/json',
-                          "X-CSRFToken": "{{ csrf_token }}"  // Ensure CSRF token is included
+                        }
+                    });
 
-                      }
-                  }).then(response => response.json()).then(data => {
+                    posts = (await response.json()).posts;
                     const flatpickrDays = document.querySelectorAll('.flatpickr-day');
 
                     flatpickrDays.forEach(dayItem => {
@@ -1802,48 +1805,43 @@
                       const formattedDay = day.padStart(2, '0');
                       const formattedDate = `${year}-${month}-${formattedDay}`;
 
-                      const postExists = data.posts.some(post => post.published_at === formattedDate);
+                      const postExists = posts.some(post => post.published_at === formattedDate);
 
                       if (postExists) {
                         dayItem.style.backgroundColor = 'red';
                       }
 
                     });
-                  });
                 }
 
                 fill();
-                  flatpickr("#calendar", {
-                      locale: "ru",
-                      dateFormat: "d.m.Y",
-                      inline: true,
-                      onChange: function(selectedDates, dateStr, instance) {
-                        fill();
-                        const formattedDate = dateStr.split('.').reverse().join('-');
-const posts = fetch('/kalendar/', {
-                      method: 'POST',
-                      headers: {
-                          'Content-Type': 'application/json',
-                          "X-CSRFToken": "{{ csrf_token }}"  // Ensure CSRF token is included
-
-                      }
-                  }).then(response => response.json()).then(data => {
-                        const postWithSelectedDate = data.posts.find(post => post.published_at === formattedDate);
-                        if(!postWithSelectedDate) {
-                            return;
-                        }
-                        const myPopup = new Popup({
-    id: "my-popup",
-    title: " ",
-    content: `
-        <img src="http://127.0.0.1:8000/media/${postWithSelectedDate.photo}" alt="Image" style="max-width: 100%; height: auto;">
-        <div class="popup-info">
-          <p class="popup-date">${postWithSelectedDate.published_at}</p>
-          <h1 calss="popup-title">${postWithSelectedDate.title}</h1>
-          <p class="popup-description">${postWithSelectedDate.content}</p>
-        </div
-    `,
-                          css: `
+                flatpickr("#calendar", {
+    locale: "ru",
+    dateFormat: "d.m.Y",
+    inline: true,
+    onMonthChange: function(selectedDates, dateStr, instance) {
+        fill();
+    },
+    onChange: function(selectedDates, dateStr, instance) {
+        fill();
+        const formattedDate = dateStr.split('.').reverse().join('-');
+        
+            const postWithSelectedDate =posts.find(post => post.published_at === formattedDate);
+            if (!postWithSelectedDate) {
+                return;
+            }
+            const myPopup = new Popup({
+                id: "my-popup",
+                title: " ",
+                content: `
+                    <img src="http://127.0.0.1:8000/media/${postWithSelectedDate.photo}" alt="Image" style="max-width: 100%; height: auto;">
+                    <div class="popup-info">
+                    <p class="popup-date">${postWithSelectedDate.published_at}</p>
+                    <h1 calss="popup-title">${postWithSelectedDate.title}</h1>
+                    <p class="popup-description">${postWithSelectedDate.content}</p>
+                    </div
+                `,
+                css: `
                             .popup.my-popup .popup-header {
                               position: absolute;
                             }
@@ -1904,11 +1902,9 @@ const posts = fetch('/kalendar/', {
                               position: relative;
                             }
                           `
-}).show();
-                  });
-
-                      }
-                  });
+            }).show();
+    }
+});
 
               </script>
             </div>
