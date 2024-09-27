@@ -3,8 +3,13 @@ version: '3.8'
 services:
   web:
     build: .
-    command: python manage.py runserver 0.0.0.0:8000
+    command: >
+      bash -c "
+      django-admin makemessages -l ru &&
+      django-admin compilemessages &&
+      python manage.py runserver 0.0.0.0:8000"
     volumes:
       - .:/app
     ports:
       - "8000:8000"
+ 
