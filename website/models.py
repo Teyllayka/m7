@@ -23,6 +23,10 @@ class PDFDocument(models.Model):
     pdf_file = models.FileField(upload_to='pdfs/')  
     uploaded_at = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        verbose_name = "ПВР и ППБ"
+        verbose_name_plural = "ПВР и ППБ"
+
     def __str__(self):
         return self.title
 
@@ -31,6 +35,10 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(max_length=150, unique=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
+
+    class Meta:
+        verbose_name = "Организации"
+        verbose_name_plural = "Организации"
 
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = []  # No required fields other than username
@@ -46,5 +54,9 @@ class Post(models.Model):
     content = models.TextField()
     photo = models.ImageField(upload_to='photos/', null=True, blank=True)
     published_at = models.DateField(null=True, blank=True)  # Allows date selection only
+
+    class Meta:
+        verbose_name = "Календарь мероприятий"
+        verbose_name_plural = "Календарь мероприятий"
 
    
