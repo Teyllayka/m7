@@ -187,14 +187,19 @@ def calendar(request):
     if not request.user.is_authenticated:
         return redirect("/")
 
+    if request.method == "POST":
+        posts = Post.objects.all()
+        return JsonResponse(
+            {"success": True, "posts": list(posts.values())}, status=200
+        )
 
-    posts = Post.objects.all()
+
+   
 
     context = {
         "username": (
             request.user.username if hasattr(request.user, "username") else "Anonymous"
         ),
-        "posts": posts,
     }
 
     return render(request, "website/calendar.html", context)
