@@ -1846,17 +1846,27 @@
             const myPopup = new Popup({
                 id: "my-popup",
                 title: " ",
-                content: `
-                    <img src="/media/${postWithSelectedDate.photo}" alt="Image" style="max-width: 100%; height: auto;">
+                content: postWithSelectedDate.photo ? `
+                    <img src="/media/${postWithSelectedDate.photo}" alt="image" style="max-width: 100%; height: auto;">
                     <div class="popup-info">
                     <p class="popup-date">${postWithSelectedDate.published_at}</p>
                     <h1 class="popup-title">${postWithSelectedDate.title}</h1>
                     <p class="popup-description">${postWithSelectedDate.content}</p>
                     </div
+                ` : `
+                    <div class="popup-info">
+                      <p class="popup-date">${postWithSelectedDate.published_at}</p>
+                      <h1 class="popup-title">${postWithSelectedDate.title}</h1>
+                      <p class="popup-description">${postWithSelectedDate.content}</p>
+                    </div
                 `,
                 css: `
                             .popup.my-popup .popup-header {
                               position: absolute;
+                            }
+
+                            .popup-content p {
+                              margin: 0;
                             }
 
                             .popup.my-popup .popup-body {
@@ -1868,6 +1878,7 @@
                             .popup.my-popup .popup-body img {
                               width: 100%;
                               height: 200px !important;
+                              object-fit:contain;
                             }
 
                             .popup.my-popup .popup-body .popup-info {
