@@ -18,7 +18,24 @@
     <link rel="dns-prefetch" href="https://ws.tildacdn.com">
     <link rel="icon" type="image/x-icon" sizes="32x32" href="{% static 'images/tild6162-3965-4030-b066-633230653432__favicon_11.ico'%}" media="(prefers-color-scheme: light)" />
     <link rel="icon" type="image/x-icon" sizes="32x32" href="{% static 'images/tild6364-6238-4232-b431-363632353361__favicon_11.ico'%}" media="(prefers-color-scheme: dark)" />
-    <!-- Assets -->
+    
+    <style>
+      #calendar-wrapper {
+        align-items: flex-start !important;
+      }
+
+      #sub-text {
+        color: #555555;
+        font-size: 18px;
+        font-family: 'Montserrat', Arial, sans-serif;
+        line-height: 1.45;
+        font-weight: 500;
+        background-position: center center;
+        border-color: transparent;
+        border-style: solid;
+      }
+    </style>
+
     <script src="https://neo.tildacdn.com/js/tilda-fallback-1.0.min.js" async charset="utf-8"></script>
     <link rel="stylesheet" href="{% static 'css/tilda-grid-3.0.min.css'%}" type="text/css" media="all" onerror="this.loaderr='y';" />
     <link rel="stylesheet" href="{% static 'css/calendar.css'%}" type="text/css" media="all" onerror="this.loaderr='y';" />
@@ -1980,8 +1997,12 @@
             <div class='t396__elem tn-elem tn-elem__7989283921725429970897' data-elem-id='1725429970897' data-elem-type='text' data-field-top-value="132" data-field-left-value="-1" data-field-width-value="572" data-field-axisy-value="top" data-field-axisx-value="left" data-field-container-value="grid" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="" data-field-widthunits-value="px" data-field-top-res-960-value="-442" data-field-left-res-960-value="10">
               <div class='tn-atom' field='tn_text_1725429970897'>разделы</div>
             </div>
-            <div class='t396__elem tn-elem tn-elem__7989283921725430385884' data-elem-id='1725430385884' data-elem-type='text' data-field-top-value="124" data-field-left-value="480" data-field-width-value="697" data-field-axisy-value="top" data-field-axisx-value="left" data-field-container-value="grid" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="" data-field-widthunits-value="px" data-field-top-res-320-value="147" data-field-left-res-320-value="0" data-field-width-res-320-value="320" data-field-top-res-480-value="167" data-field-left-res-480-value="47" data-field-width-res-480-value="386" data-field-top-res-640-value="167" data-field-left-res-640-value="39" data-field-width-res-640-value="562" data-field-top-res-960-value="144" data-field-left-res-960-value="0" data-field-width-res-960-value="960">
+            <div class='t396__elem tn-elem tn-elem__7989283921725430385884' id="calendar-wrapper" data-elem-id='1725430385884' data-elem-type='text' data-field-top-value="124" data-field-left-value="480" data-field-width-value="697" data-field-axisy-value="top" data-field-axisx-value="left" data-field-container-value="grid" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="" data-field-widthunits-value="px" data-field-top-res-320-value="147" data-field-left-res-320-value="0" data-field-width-res-320-value="320" data-field-top-res-480-value="167" data-field-left-res-480-value="47" data-field-width-res-480-value="386" data-field-top-res-640-value="167" data-field-left-res-640-value="39" data-field-width-res-640-value="562" data-field-top-res-960-value="144" data-field-left-res-960-value="0" data-field-width-res-960-value="960">
               <div class='tn-atom' field='tn_text_1725430385884'>Календарь мероприятий</div>
+              <div id="sub-text" >
+                Для того чтобы ознакомиться с информацией по мероприятию кликните на дату выделенную красным цветом
+              </div>
+             
               <div id="calendar"></div>
               <script src="https://cdn.jsdelivr.net/npm/@simondmc/popup-js@1.4.3/popup.min.js"></script>
               <script>
@@ -2066,6 +2087,7 @@ const posts = fetch('/kalendar/', {
 
               </script>
             </div>
+            
             <div class='t396__elem tn-elem tn-elem__7989283921725430979487' data-elem-id='1725430979487' data-elem-type='text' data-field-top-value="26" data-field-left-value="521" data-field-width-value="333" data-field-axisy-value="top" data-field-axisx-value="left" data-field-container-value="grid" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="" data-field-widthunits-value="px" data-field-top-res-640-value="-211" data-field-left-res-640-value="551" data-field-top-res-960-value="25" data-field-left-res-960-value="316" data-field-width-res-960-value="191">
               <div class='tn-atom' field='tn_text_1725430979487'>+7 (485) 555-05-50</div>
             </div>
@@ -2157,22 +2179,6 @@ const posts = fetch('/kalendar/', {
             <div class='t396__elem tn-elem tn-elem__7989283921727088598632' data-elem-id='1727088598632' data-elem-type='button' data-field-top-value="641" data-field-left-value="276" data-field-height-value="19" data-field-width-value="146" data-field-axisy-value="top" data-field-axisx-value="left" data-field-container-value="grid" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="px" data-field-widthunits-value="px" data-field-top-res-320-value="683" data-field-left-res-320-value="173" data-field-top-res-480-value="657" data-field-left-res-480-value="327" data-field-top-res-640-value="699" data-field-left-res-640-value="320" data-field-top-res-960-value="637" data-field-left-res-960-value="309">
               <a class='tn-atom' href="/pvr">Вернуться на главную</a>
             </div>
-            {% if posts %}
-                <ul>
-                    {% for post in posts %}
-                        <li>
-                            <h2>{{ post.title }}</h2>
-                            {% if post.photo %}
-                                <img src="{{ post.photo.url }}" alt="{{ post.title }}" style="max-width:200px; height:auto;">
-                            {% endif %}
-                            <p>{{ post.content }}</p>
-                            <p><strong>Published on:</strong> {{ post.published_at }}</p>
-                        </li>
-                    {% endfor %}
-                </ul>
-            {% else %}
-                <p>No posts available.</p>
-            {% endif %}
           </div>
         </div>
         <script>
