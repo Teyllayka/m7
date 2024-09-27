@@ -1819,6 +1819,9 @@
     locale: "ru",
     dateFormat: "d.m.Y",
     inline: true,
+    onYearChange: function(selectedDates, dateStr, instance) {
+        fill();
+    },
     onMonthChange: function(selectedDates, dateStr, instance) {
         fill();
     },
