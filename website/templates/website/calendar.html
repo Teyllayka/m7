@@ -37,11 +37,20 @@
         border-color: transparent;
         border-style: solid;
       }
+
+      .flatpickr-calendar {
+        font-family: 'Montserrat', Arial, sans-serif;
+      }
+
+
+
+      
     </style>
 
     <script src="https://neo.tildacdn.com/js/tilda-fallback-1.0.min.js" async charset="utf-8"></script>
     <link rel="stylesheet" href="{% static 'css/tilda-grid-3.0.min.css'%}" type="text/css" media="all" onerror="this.loaderr='y';" />
     <link rel="stylesheet" href="{% static 'css/calendar.css'%}" type="text/css" media="all" onerror="this.loaderr='y';" />
+    <link rel="stylesheet" href="{% static 'css/user.css'%}" type="text/css" media="all" onerror="this.loaderr='y';" />
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&subset=latin,cyrillic" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alumni+Sans:wght@300;400;500;600;700&family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" type="text/css" />
@@ -1760,7 +1769,7 @@
             </div>
             <div class='t396__elem tn-elem tn-elem__7989283921725430385884' id="calendar-wrapper" data-elem-id='1725430385884' data-elem-type='text' data-field-top-value="124" data-field-left-value="480" data-field-width-value="697" data-field-axisy-value="top" data-field-axisx-value="left" data-field-container-value="grid" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="" data-field-widthunits-value="px" data-field-top-res-320-value="147" data-field-left-res-320-value="0" data-field-width-res-320-value="320" data-field-top-res-480-value="167" data-field-left-res-480-value="47" data-field-width-res-480-value="386" data-field-top-res-640-value="167" data-field-left-res-640-value="39" data-field-width-res-640-value="562" data-field-top-res-960-value="144" data-field-left-res-960-value="0" data-field-width-res-960-value="960">
               <div class='tn-atom' field='tn_text_1725430385884'>Календарь мероприятий</div>
-              <div id="sub-text" >
+              <div id="sub-text" style="margin-bottom:30px" >
                 Для того чтобы ознакомиться с информацией по мероприятию кликните на дату выделенную красным цветом
               </div>
              
@@ -1809,6 +1818,7 @@
 
                       if (postExists) {
                         dayItem.style.backgroundColor = 'red';
+                        dayItem.style.color = 'white';
                       }
 
                     });
@@ -1947,102 +1957,21 @@
             <div class='t396__elem tn-elem tn-elem__7989283921726495864112' data-elem-id='1726495864112' data-elem-type='shape' data-field-top-value="-276" data-field-left-value="109" data-field-height-value="100" data-field-width-value="100" data-field-axisy-value="top" data-field-axisx-value="left" data-field-container-value="grid" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="px" data-field-widthunits-value="px" data-field-top-res-320-value="17" data-field-left-res-320-value="220" data-field-height-res-320-value="33" data-field-width-res-320-value="100" data-field-top-res-480-value="19" data-field-left-res-480-value="358" data-field-width-res-480-value="122" data-field-top-res-640-value="21" data-field-left-res-640-value="509" data-field-width-res-640-value="122" data-field-top-res-960-value="25" data-field-left-res-960-value="838" data-field-height-res-960-value="40" data-field-width-res-960-value="122">
               <a class='tn-atom' href="#menu"></a>
             </div>
-            <div 
-            class="t396__elem tn-elem tn-elem__7989283921727420302234"
-            data-elem-id="1727420302234"
-            data-elem-type="text"
-            data-field-top-value="26"
-            data-field-left-value="781"
-            data-field-width-value="419"
-            data-field-axisy-value="top"
-            data-field-axisx-value="left"
-            data-field-container-value="grid"
-            data-field-topunits-value="px"
-            data-field-leftunits-value="px"
-            data-field-heightunits-value=""
-            data-field-widthunits-value="px"
-            data-field-top-res-320-value="68"
-            data-field-left-res-320-value="34"
-            data-field-width-res-320-value="275"
-            data-field-top-res-480-value="80"
-            data-field-left-res-480-value="40"
-            data-field-width-res-480-value="432"
-            data-field-top-res-640-value="70"
-            data-field-left-res-640-value="40"
-            data-field-width-res-640-value="592"
-            data-field-top-res-960-value="25"
-            data-field-left-res-960-value="544"
-            data-field-width-res-960-value="284"
-            >
-              <div class='tn-atom' field='tn_text_1727088598693'>{{username}}</div>
+            <div class="user">
+                <img src="{% static 'images/tild3961-3766-4930-b666-646263333432__free-icon-user-19464.png'%}" alt='' imgfield='tn_img_1727088598687' />
+                <div class="container">
+                    <div class="username">{{username}}</div>
+                    <div class='button' onclick="{
+                        document.getElementById('logout').submit();
+                      }">выход</div>
+                      <form method="POST" id="logout" style="display: none;" action="{% url 'logout' %}">
+                        {% csrf_token %}
+                        <button type="submit">Logout</button>
+                      </form>
+                </div>
             </div>
-            <div 
-            class="t396__elem tn-elem tn-elem__7989283921727420302222"
-            data-elem-id="1727420302222"
-            data-elem-type="image"
-            data-field-top-value="30"
-            data-field-left-value="739"
-            data-field-width-value="34"
-            data-field-axisy-value="top"
-            data-field-axisx-value="left"
-            data-field-container-value="grid"
-            data-field-topunits-value="px"
-            data-field-leftunits-value="px"
-            data-field-heightunits-value=""
-            data-field-widthunits-value="px"
-            data-field-filewidth-value="512"
-            data-field-fileheight-value="512"
-            data-field-top-res-320-value="74"
-            data-field-left-res-320-value="0"
-            data-field-width-res-320-value="29"
-            data-field-top-res-480-value="84"
-            data-field-left-res-480-value="0"
-            data-field-top-res-640-value="74"
-            data-field-left-res-640-value="0"
-            data-field-top-res-960-value="29"
-            data-field-left-res-960-value="504"
-            >
-              <div class='tn-atom'>
-                <img class='tn-atom__img t-img' data-original="{% static 'images/tild3961-3766-4930-b666-646263333432__free-icon-user-19464.png'%}" alt='' imgfield='tn_img_1727088598687' />
-              </div>
-            </div>
-            <div 
+
             
-            class="t396__elem tn-elem tn-elem__7989283921727420302213"
-            data-elem-id="1727420302213"
-            data-elem-type="button"
-            data-field-top-value="46"
-            data-field-left-value="781"
-            data-field-height-value="18"
-            data-field-width-value="83"
-            data-field-axisy-value="top"
-            data-field-axisx-value="left"
-            data-field-container-value="grid"
-            data-field-topunits-value="px"
-            data-field-leftunits-value="px"
-            data-field-heightunits-value="px"
-            data-field-widthunits-value="px"
-            data-field-top-res-320-value="88"
-            data-field-left-res-320-value="34"
-            data-field-width-res-320-value="83"
-            data-field-top-res-480-value="99"
-            data-field-left-res-480-value="40"
-            data-field-top-res-640-value="89"
-            data-field-left-res-640-value="40"
-            data-field-top-res-960-value="44"
-            data-field-left-res-960-value="544"
-            data-field-height-res-960-value="19"
-            data-field-width-res-960-value="101"
-            style="cursor: pointer;"
-            >
-                <div class='tn-atom' onclick="{
-                    document.getElementById('logout').submit();
-                  }">выход</div>
-                  <form method="POST" id="logout" style="display: none;" action="{% url 'logout' %}">
-                    {% csrf_token %}
-                    <button type="submit">Logout</button>
-                  </form>
-            </div>
             <div class='t396__elem tn-elem tn-elem__7989283921727088598680' data-elem-id='1727088598680' data-elem-type='text' data-field-top-value="48" data-field-left-value="45" data-field-width-value="258" data-field-axisy-value="top" data-field-axisx-value="left" data-field-container-value="grid" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="" data-field-widthunits-value="px" data-field-top-res-320-value="32" data-field-left-res-320-value="40" data-field-width-res-320-value="120" data-field-top-res-480-value="38" data-field-left-res-480-value="45" data-field-top-res-640-value="42" data-field-top-res-960-value="50" data-field-left-res-960-value="45" data-field-width-res-960-value="223">
               <div class='tn-atom' field='tn_text_1727088598680'>Личный кабинет для клиентов</div>
             </div>
