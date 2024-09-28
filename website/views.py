@@ -3,7 +3,7 @@ from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 import requests
 
-from website.models import PDFDocument, Post
+from website.models import PDFDocument, Phone, Post
 from .forms import CarPassForm, PasswordOnlyAuthenticationForm, SupportRequestForm
 
 
@@ -48,11 +48,14 @@ def pvr(request):
         PDFDocument.objects.filter(title="pvr").order_by("-uploaded_at").first()
     )
 
+    phone = Phone.objects.first()
+
     context = {
         "username": (
             request.user.username if hasattr(request.user, "username") else "Anonymous"
         ),
         "pdf_document": pdf_document,
+        "phone": phone
     }
 
     return render(request, "website/pvr.html", context)
@@ -65,12 +68,14 @@ def ppb(request):
     pdf_document = (
         PDFDocument.objects.filter(title="ppb").order_by("-uploaded_at").first()
     )
+    phone = Phone.objects.first()
 
     context = {
         "username": (
             request.user.username if hasattr(request.user, "username") else "Anonymous"
         ),
         "pdf_document": pdf_document,
+        "phone": phone
     }
 
     return render(request, "website/ppb.html", context)
@@ -123,11 +128,13 @@ def application(request):
     if not request.user.is_authenticated:
         return redirect("/")
 
+    phone = Phone.objects.first()
     context = {
         "username": (
             request.user.username if hasattr(request.user, "username") else "Anonymous"
         ),
-        "form": SupportRequestForm(),  # Include form in the context
+        "form": SupportRequestForm(), 
+        "phone": phone
     }
 
     return render(request, "website/application.html", context)
@@ -170,6 +177,8 @@ def kpp(request):
     else:
         if not request.user.is_authenticated:
             return redirect("/")
+        
+        phone = Phone.objects.first()
 
         context = {
             "username": (
@@ -177,7 +186,8 @@ def kpp(request):
                 if hasattr(request.user, "username")
                 else "Anonymous"
             ),
-            "form": CarPassForm(),  # Include form in the context
+            "form": CarPassForm(),  
+            "phone": phone
         }
 
         return render(request, "website/kpp.html", context)
@@ -194,6 +204,7 @@ def calendar(request):
             {"success": True, "posts": list(posts.values())}, status=200
         )
 
+    phone = Phone.objects.first()
 
 
 
@@ -201,6 +212,7 @@ def calendar(request):
         "username": (
             request.user.username if hasattr(request.user, "username") else "Anonymous"
         ),
+        "phone": phone
     }
 
     return render(request, "website/calendar.html", context)

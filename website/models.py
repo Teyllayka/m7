@@ -60,3 +60,14 @@ class Post(models.Model):
         verbose_name_plural = "Календарь мероприятий"
 
    
+
+class Phone(models.Model):
+    phone = models.CharField(max_length=255)
+    phone_displayed = models.CharField(max_length=255)
+
+    class Meta:
+        verbose_name = "Телефон"
+        verbose_name_plural = "Телефон"
+
+    def __str__(self):
+        return self.phone

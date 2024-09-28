@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import CustomUser, PDFDocument, Post
+from .models import CustomUser, PDFDocument, Phone, Post
 from django.utils.html import format_html
 
 class CustomUserAdmin(UserAdmin):
@@ -22,6 +22,12 @@ class CustomUserAdmin(UserAdmin):
     ordering = ['pk']
 
 admin.site.register(CustomUser, CustomUserAdmin)
+
+
+@admin.register(Phone)
+class PhoneAdmin(admin.ModelAdmin):
+    list_display = ['phone', 'phone_displayed']
+    search_fields = ['phone', 'phone_displayed']
 
 
 @admin.register(PDFDocument)
