@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import CustomUser, PDFDocument, Phone, Post
+from .models import CustomUser, PDFDocument, Phone, Post, Pages
 from django.utils.html import format_html
 
 class CustomUserAdmin(UserAdmin):
@@ -55,3 +55,8 @@ class PostAdmin(admin.ModelAdmin):
             'fields': ('title', 'content', 'photo', 'published_at'),
         }),
     )
+
+
+@admin.register(Pages)
+class PagesAdmin(admin.ModelAdmin):
+    list_display = ('page', 'title', 'content')
