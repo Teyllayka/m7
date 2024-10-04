@@ -3,7 +3,7 @@ from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 import requests
 
-from website.models import PDFDocument, Phone, Post
+from website.models import PDFDocument, Phone, Post, Pages
 from .forms import CarPassForm, PasswordOnlyAuthenticationForm, SupportRequestForm
 
 
@@ -28,18 +28,6 @@ def custom_login_view(request):
     return render(request, "website/login.html", {"form": form})
 
 
-def homepage_view(request):
-    if request.user.is_authenticated:
-        username = (
-            request.user.username
-            if hasattr(request.user, "username")
-            else "No username set"
-        )
-        return HttpResponse(f"Welcome to the homepage, {username}!")
-    else:
-        return HttpResponse("Welcome to the homepage! Please log in.")
-
-
 def pvr(request):
     if not request.user.is_authenticated:
         return redirect("/")
@@ -48,6 +36,9 @@ def pvr(request):
         PDFDocument.objects.filter(title="pvr").order_by("-uploaded_at").first()
     )
 
+
+    page = Pages.objects.filter(page="pvr").first()
+
     phone = Phone.objects.first()
 
     context = {
@@ -55,7 +46,8 @@ def pvr(request):
             request.user.username if hasattr(request.user, "username") else "Anonymous"
         ),
         "pdf_document": pdf_document,
-        "phone": phone
+        "phone": phone,
+        "page": page
     }
 
     return render(request, "website/pvr.html", context)
@@ -70,12 +62,16 @@ def ppb(request):
     )
     phone = Phone.objects.first()
 
+    page = Pages.objects.filter(page="ppb").first()
+
+
     context = {
         "username": (
             request.user.username if hasattr(request.user, "username") else "Anonymous"
         ),
         "pdf_document": pdf_document,
-        "phone": phone
+        "phone": phone,
+        "page": page
     }
 
     return render(request, "website/ppb.html", context)
@@ -129,12 +125,16 @@ def application(request):
         return redirect("/")
 
     phone = Phone.objects.first()
+    page = Pages.objects.filter(page="application").first()
+
     context = {
         "username": (
             request.user.username if hasattr(request.user, "username") else "Anonymous"
         ),
         "form": SupportRequestForm(), 
-        "phone": phone
+        "phone": phone,
+        "page": page
+
     }
 
     return render(request, "website/application.html", context)
@@ -179,6 +179,8 @@ def kpp(request):
             return redirect("/")
         
         phone = Phone.objects.first()
+        page = Pages.objects.filter(page="kpp").first()
+
 
         context = {
             "username": (
@@ -187,7 +189,8 @@ def kpp(request):
                 else "Anonymous"
             ),
             "form": CarPassForm(),  
-            "phone": phone
+            "phone": phone,
+            "page": page
         }
 
         return render(request, "website/kpp.html", context)
@@ -205,6 +208,7 @@ def calendar(request):
         )
 
     phone = Phone.objects.first()
+    page = Pages.objects.filter(page="kalendar").first()
 
 
 
@@ -212,7 +216,8 @@ def calendar(request):
         "username": (
             request.user.username if hasattr(request.user, "username") else "Anonymous"
         ),
-        "phone": phone
+        "phone": phone,
+        "page": page
     }
 
     return render(request, "website/calendar.html", context)

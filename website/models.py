@@ -71,3 +71,16 @@ class Phone(models.Model):
 
     def __str__(self):
         return self.phone
+
+
+class Pages(models.Model):
+    page= models.CharField(max_length=255)
+    title = models.CharField(max_length=255)
+    content = models.CharField(max_length=255)
+
+    class Meta:
+        verbose_name = "Страницы"
+        verbose_name_plural = "Страницы"
+
+    def __str__(self):
+        return self.title

@@ -119,3 +119,53 @@
   text-underline-offset: 3px !important;
 }
 
+  @media screen and (max-width: 1199px) {
+
+           
+    #rec798928392 .t396__artboard,
+                #rec798928392 .t396__filter,
+                #rec798928392 .t396__carrier {
+      background-attachment: scroll;
+    }
+  }
+
+  @media screen and (max-width: 959px) {
+    .t396__artboard,
+    .t396__filter,
+    .t396__carrier {
+        height: 780px;
+    }
+
+
+
+    #rec793716274 .t396__carrier {
+      background-attachment: scroll;
+    }
+  }
+
+  @media screen and (max-width: 639px) {
+
+    .t396__artboard,
+    .t396__filter,
+    .t396__carrier {
+        height: 790px;
+    }
+
+    #rec793716274 .t396__carrier {
+      background-attachment: scroll;
+    }
+  }
+
+  @media screen and (max-width: 479px) {
+
+    .t396__artboard,
+    .t396__filter,
+    .t396__carrier {
+        height: 790px;
+    }
+
+
+    #rec793716274 .t396__carrier {
+      background-attachment: scroll;
+    }
+  }

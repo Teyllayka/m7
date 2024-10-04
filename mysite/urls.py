@@ -10,7 +10,6 @@ from django.conf import settings
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", views.custom_login_view, name="login"),
-    path('homepage/', views.homepage_view, name='homepage'),
     path('pvr/', views.pvr, name="pvr"),
     path('ppb/', views.ppb, name="ppb"),
     path('application/', views.application, name="application"),
