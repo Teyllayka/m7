@@ -7,7 +7,7 @@ SECRET_KEY = "django-insecure-4*56%vt)6lwkepz4*^6)z+n*#$qemu30&r=@^00zn2imp-^c6x
 
 DEBUG = False
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["https://portal.m7tp.ru"]
 
 CSRF_TRUSTED_ORIGINS = [
     "https://portal.m7tp.ru",
@@ -84,7 +84,18 @@ PASSWORD_HASHERS = [
 
 
 AUTH_PASSWORD_VALIDATORS = [
-   
+    {
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
+    },
 ]
 
 
@@ -100,21 +111,18 @@ LOCALE_PATHS = (
 )
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = "/static/"
+STATIC_ROOT = '/var/www/portal/static/'
 
-# Define where Django will look for static files in development
+
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
 
-MEDIA_URL = "/media/"
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_ROOT = '/var/www/media'
+MEDIA_URL = '/media/'
 
 
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
