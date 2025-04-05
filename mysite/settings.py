@@ -7,7 +7,7 @@ SECRET_KEY = "django-insecure-4*56%vt)6lwkepz4*^6)z+n*#$qemu30&r=@^00zn2imp-^c6x
 
 DEBUG = False
 
-ALLOWED_HOSTS = ["https://portal.m7tp.ru"]
+ALLOWED_HOSTS = ["*"]
 
 CSRF_TRUSTED_ORIGINS = [
     "https://portal.m7tp.ru",
