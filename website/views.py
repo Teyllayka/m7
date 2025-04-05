@@ -1,10 +1,10 @@
 from django.contrib.auth import login
-from django.http import HttpResponse, JsonResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 import requests
 
-from website.models import PDFDocument, Phone, Post, Pages
-from .forms import CarPassForm, PasswordOnlyAuthenticationForm, SupportRequestForm
+from website.models import  Pages
+from .forms import PasswordOnlyAuthenticationForm, SupportRequestForm
+from django.contrib.auth import logout
 
 
 def custom_login_view(request):
@@ -13,211 +13,82 @@ def custom_login_view(request):
         if form.is_valid():
             user = form.cleaned_data["user"]
             login(request, user)
-            return JsonResponse({"success": True}, status=200)
-
-        errors = form.errors.get_json_data()
-        print(errors)
-        return JsonResponse({"success": False, "errors": errors}, status=200)
-
+            return redirect("application")
+        else:
+            return render(request, "website/auth.html", {"form": form})
     else:
         if request.user.is_authenticated:
-            return redirect("pvr")
-
+            return redirect("application")
         form = PasswordOnlyAuthenticationForm()
-
-    return render(request, "website/login.html", {"form": form})
-
-
-def pvr(request):
-    if not request.user.is_authenticated:
-        return redirect("/")
-
-    pdf_document = (
-        PDFDocument.objects.filter(title="pvr").order_by("-uploaded_at").first()
-    )
+    return render(request, "website/auth.html", {"form": form})
 
 
-    page = Pages.objects.filter(page="pvr").first()
-
-    phone = Phone.objects.first()
-
-    context = {
-        "username": (
-            request.user.username if hasattr(request.user, "username") else "Anonymous"
-        ),
-        "pdf_document": pdf_document,
-        "phone": phone,
-        "page": page
-    }
-
-    return render(request, "website/pvr.html", context)
-
-
-def ppb(request):
-    if not request.user.is_authenticated:
-        return redirect("/")
-
-    pdf_document = (
-        PDFDocument.objects.filter(title="ppb").order_by("-uploaded_at").first()
-    )
-    phone = Phone.objects.first()
-
-    page = Pages.objects.filter(page="ppb").first()
-
-
-    context = {
-        "username": (
-            request.user.username if hasattr(request.user, "username") else "Anonymous"
-        ),
-        "pdf_document": pdf_document,
-        "phone": phone,
-        "page": page
-    }
-
-    return render(request, "website/ppb.html", context)
 
 
 def application(request):
     if request.method == "POST":
-
-        # print(
-        #     data["phone_number"]
-        #     .replace(" ", "")
-        #     .replace("(", "")
-        #     .replace(")", "")
-        #     .replace("-", "")
-        # )
-
-        form = SupportRequestForm(request.POST)
+        form = SupportRequestForm(request.POST, request.FILES)
         if form.is_valid():
             data = request.POST
 
+
             params = {
-                "key": "at9DgisOQMiBxKS4V1HA5RXmTgl4D6v2aLsIb6ge",
+                "key": "ogFGBvgVVJ8gCA8Eo2v81UbEeA6yqA5syqoFZtdT",
                 "username": "tech",
                 "password": "!tech@2024",
                 "action": "insert",
-                "entity_id": 33,
-                "items[field_320]": request.user.username,
-                "items[field_330]": data["contact_name"],
-                "items[field_331]": data["phone_number"],
-                "items[field_324]": data["message"],
-                "items[parent_item_id]": "1",
+                "entity_id": 53,
+                "items[field_773]": "Арендатор",
+                "items[field_543]": request.user.username,
+                "items[field_547]": data["phone"],
+                "items[field_544]": data["message"],
+                "items[field_542]": data["type"],
+                "items[field_546]": request.user.email,
+                "items[field_2972]": form.cleaned_data.get("file"),
             }
 
-            url = "https://vvvgroup.ru/ts/api/rest.php"
+            url = "https://tm.vvvgroup.ru/api/rest.php"
             try:
                 response = requests.post(url, data=params, timeout=10, verify=False)
-                response.raise_for_status()  # Raise an exception for HTTP errors
+                response.raise_for_status() 
                 result = response.json()
-                print(result)  # Or handle the result as needed
-                return JsonResponse({"success": True}, status=200)
+                print(result)  
+                return redirect("application")
 
             except requests.exceptions.RequestException as e:
-                print(f"An error occurred: {e}")
-                errors = form.errors.get_json_data()
-                print(errors)
-                return JsonResponse({"success": False, "errors": errors}, status=200)
-
-            pass
+                return redirect("application")
+       
 
     if not request.user.is_authenticated:
         return redirect("/")
 
-    phone = Phone.objects.first()
     page = Pages.objects.filter(page="application").first()
 
     context = {
         "username": (
             request.user.username if hasattr(request.user, "username") else "Anonymous"
         ),
+        "user_phone" : request.user.phone if hasattr(request.user, "phone") else None,
+        "user_email" : request.user.email if hasattr(request.user, "email") else None,
         "form": SupportRequestForm(), 
-        "phone": phone,
         "page": page
 
     }
 
-    return render(request, "website/application.html", context)
+    return render(request, "website/order.html", context)
 
 
-def kpp(request):
-    if request.method == "POST":
-        print(request.POST)
-        form = CarPassForm(request.POST)
-        if form.is_valid():
-            data = request.POST
+def logout_view(request):
+    logout(request)
+    return redirect('/')
 
-            params = {
-                "key": "at9DgisOQMiBxKS4V1HA5RXmTgl4D6v2aLsIb6ge",
-                "username": "tech",
-                "password": "!tech@2024",
-                "action": "insert",
-                "entity_id": 31,
-                "items[field_295]": request.user.username,
-                "items[field_296]": data["car_number"],
-                "items[field_297]": data["car_type"],
-                "items[field_298]": data["entry_date"],
-                "items[parent_item_id]": "1",
-            }
-
-            url = "https://vvvgroup.ru/ts/api/rest.php"
-            try:
-                response = requests.post(url, data=params, timeout=10, verify=False)
-                response.raise_for_status()  # Raise an exception for HTTP errors
-                result = response.json()
-                print(result)  # Or handle the result as needed
-                return JsonResponse({"success": True}, status=200)
-            except requests.exceptions.RequestException as e:
-                print(f"An error occurred: {e}")
-                errors = form.errors.get_json_data()
-                print(errors)
-                return JsonResponse({"success": False, "errors": errors}, status=200)
-
-            pass
-    else:
-        if not request.user.is_authenticated:
-            return redirect("/")
-        
-        phone = Phone.objects.first()
-        page = Pages.objects.filter(page="kpp").first()
-
-
-        context = {
-            "username": (
-                request.user.username
-                if hasattr(request.user, "username")
-                else "Anonymous"
-            ),
-            "form": CarPassForm(),  
-            "phone": phone,
-            "page": page
-        }
-
-        return render(request, "website/kpp.html", context)
-
-
-def calendar(request):
-
+def page_detail(request, page):
     if not request.user.is_authenticated:
         return redirect("/")
-
-    if request.method == "POST":
-        posts = Post.objects.all()
-        return JsonResponse(
-            {"success": True, "posts": list(posts.values())}, status=200
-        )
-
-    phone = Phone.objects.first()
-    page = Pages.objects.filter(page="kalendar").first()
-
-
-
-    context = {
-        "username": (
-            request.user.username if hasattr(request.user, "username") else "Anonymous"
-        ),
-        "phone": phone,
-        "page": page
-    }
-
-    return render(request, "website/calendar.html", context)
+    
+ 
+    page_obj = get_object_or_404(Pages, page=page)
+    return render(request, 'website/page.html', {'page': page_obj,    "username": (
+        request.user.username if hasattr(request.user, "username") else "Anonymous"
+    ),
+})

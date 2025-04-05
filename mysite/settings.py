@@ -5,14 +5,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = "django-insecure-4*56%vt)6lwkepz4*^6)z+n*#$qemu30&r=@^00zn2imp-^c6x"
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://f7f5-77-219-9-162.ngrok-free.app",
-    "https://e9d0-94-30-157-106.ngrok-free.app",
-    "https://6531-83-99-252-208.ngrok-free.app",
+    "portal.m7tp.ru",
 ]
 
 LOGOUT_REDIRECT_URL = "/"
@@ -25,6 +23,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    'ckeditor'
 ]
 
 MIDDLEWARE = [
@@ -85,18 +84,7 @@ PASSWORD_HASHERS = [
 
 
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
-    },
+   
 ]
 
 

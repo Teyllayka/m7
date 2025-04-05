@@ -1,0 +1,57 @@
+{% load static %}
+
+<!doctype html>
+<html class="no-js" lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>M7</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="{% static 'css/mainv88g6bn.min.css' %}" rel="stylesheet" type="text/css">
+    <link rel="icon" type="image/x-icon" href="{% static 'img/content/favicon.png' %}">
+  </head>
+  <body>
+    <div class="wrapper">
+      <section class="content">
+        <div class="max-width">
+          <div class="auth-b">
+            <div class="auth-b__logo">
+              <img src="{% static 'img/content/logo.svg' %}" alt="">
+              <span>Портал арендаторов</span>
+            </div>
+            <form method="POST" action="{% url 'login' %}" class="auth-b__form">
+                {% csrf_token %}
+                <div class="auth-b__field">
+                  <input type="password" name="password" class="input-text" placeholder="Введите ваш пароль">
+                </div>
+                <div class="auth-b__field">
+                  <input type="submit" class="button" value="Войти">
+                </div>
+            </form>
+          </div>
+        </div>
+      </section>
+      <footer class="footer-b">
+        <div class="max-width">
+          <div class="footer-b__grid">
+            <div class="footer-b__logo">
+              <img src="{% static 'img/content/logo.svg' %}" alt="">
+              <span>В центре событий</span>
+            </div>
+            <div class="footer-b__menu">
+              <a href="#" class="footer-b__links">Главная</a>
+              <a href="#" class="footer-b__links">Магазины</a>
+              <a href="#" class="footer-b__links">Контакты</a>
+            </div>
+            <div class="footer-b__actions">
+              <a href="#" class="button button_small">Портал арендатора</a>
+              <a href="#" class="button button_small">Обращение к руководителю</a>
+              <a href="#" class="button button_small">Потенциальным арендаторам</a>
+            </div>
+          </div>
+        </div>
+      </footer>
+      <script src="{% static 'js/mainv88g6bn.min.js' %}"></script>
+    </div>
+  </body>
+</html>

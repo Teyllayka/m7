@@ -68,14 +68,17 @@ class CarPassForm(forms.Form):
 
 
 class SupportRequestForm(forms.Form):
-    contact_name = forms.CharField(
-        label="Контактное лицо",
-        max_length=100,
-        widget=forms.TextInput(
-            attrs={"class": "form-control", "placeholder": "Контактное лицо"}
-        ),
+    type = forms.ChoiceField(
+        choices=[
+            ('17', 'Вопрос в коммерческую службу'),
+            ('18', 'Заявка на проведение технических работ'),
+            ('19', 'Письмо руководителю'),
+        ],
+        widget=forms.RadioSelect,
+        label="Вид обращения"
     )
-    phone_number = forms.CharField(
+    file = forms.FileField(required=False, label="Вложение")
+    phone = forms.CharField(
         label="Телефон",
         max_length=18,
         widget=forms.TextInput(

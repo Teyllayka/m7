@@ -1,0 +1,240 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html class="no-js" lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>M7</title>
+    <meta content="" name="description" />
+    <meta content="" name="keywords" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="{% static 'css/mainv88g6bn.min.css' %}"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="{% static 'img/content/favicon.png' %}"
+    />
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <header class="header-b">
+        <div class="max-width">
+          <div class="header-b__grid">
+            <a href="/" class="header-b__logo">
+              <img src="{% static 'img/content/logo.svg' %}" alt="" />
+              <span>Портал арендатора</span>
+            </a>
+
+            <div class="header-b__social">
+              <a
+                href="https://t.me/ShoppingCenterM7"
+                class="header-b__social-item"
+              >
+                <img
+                  src="{% static 'img/content/tg.png' %}"
+                  width="40"
+                  height="40"
+                  alt=""
+                />
+              </a>
+              <a href="https://vk.com/tc_m7" class="header-b__social-item">
+                <img
+                  src="{% static 'img/content/vk.png' %}"
+                  width="47"
+                  height="47"
+                  alt=""
+                />
+              </a>
+            </div>
+
+            <div class="header-b__actions">
+              <div class="header-b__user">
+                <img
+                  src="{% static 'img/content/user.png' %}"
+                  width="35"
+                  height="35"
+                  alt=""
+                />{{username}}
+              </div>
+              <a href="{% url 'logout' %}" class="button button_small">Выйти</a>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section class="content">
+        <div class="max-width">
+          <div class="page-grid">
+            <div class="page-grid__sidebar">
+              <div class="page-grid__menu">
+                <a href="/application" class="page-grid__item">
+                  <span class="page-grid__item-count">01</span>
+                  <span class="page-grid__item-line"></span>
+                  <span class="page-grid__item-link">Заявки</span>
+                </a>
+                <a href="/pvr" class="page-grid__item">
+                  <span class="page-grid__item-count">02</span>
+                  <span class="page-grid__item-line"></span>
+                  <span class="page-grid__item-link"
+                    >Правила внутреннего распорядка</span
+                  >
+                </a>
+                <a href="/pp" class="page-grid__item">
+                  <span class="page-grid__item-count">03</span>
+                  <span class="page-grid__item-line"></span>
+                  <span class="page-grid__item-link">Правила парковки</span>
+                </a>
+                <a href="/ppb" class="page-grid__item">
+                  <span class="page-grid__item-count">04</span>
+                  <span class="page-grid__item-line"></span>
+                  <span class="page-grid__item-link"
+                    >Правила пожарной безопасности</span
+                  >
+                </a>
+                <a href="/p" class="page-grid__item">
+                  <span class="page-grid__item-count">05</span>
+                  <span class="page-grid__item-line"></span>
+                  <span class="page-grid__item-link">Прейскурант</span>
+                </a>
+              </div>
+            </div>
+
+            <div class="page-grid__content">
+              <h1 class="title">Подать заявку</h1>
+
+              <div class="order-b">
+                <form
+                  class="order-b__form"
+                  method="post"
+                  action="{% url 'application' %}"
+                  enctype="multipart/form-data"
+                >
+                  {% csrf_token %}
+
+                  <div class="order-b__field">
+                    <div class="order-b__label">Вид обращения</div>
+                    <div class="order-b__checkboxes">
+                      <div class="order-b__checkboxes-item">
+                        <input
+                          type="radio"
+                          class="radio-btn"
+                          name="type"
+                          id="type-1"
+                          value="17"
+                          required
+                        />
+                        <label for="type-1">Вопрос в коммерческую службу</label>
+                      </div>
+                      <div class="order-b__checkboxes-item">
+                        <input
+                          type="radio"
+                          class="radio-btn"
+                          name="type"
+                          id="type-2"
+                          value="18"
+                          required
+                        />
+                        <label for="type-2"
+                          >Заявка на проведение технических работ</label
+                        >
+                      </div>
+                      <div class="order-b__checkboxes-item">
+                        <input
+                          type="radio"
+                          class="radio-btn"
+                          name="type"
+                          id="type-3"
+                          value="19"
+                          required
+                        />
+                        <label for="type-3">Письмо руководителю</label>
+                      </div>
+                    </div>
+                    <div class="order-b__value">
+                      <textarea
+                        name="message"
+                        class="input-text"
+                        placeholder="Текст обращения"
+                        id=""
+                        cols="30"
+                        rows="10"
+                        required
+                      ></textarea>
+                    </div>
+                  </div>
+                  <div class="order-b__field">
+                    <div class="order-b__label">Вложение</div>
+                    <div class="order-b__file">
+                      <input type="file" name="file" id="file" />
+                      <label for="file">Выберите файл</label>
+                      <span></span>
+                    </div>
+                  </div>
+                  <div class="order-b__field">
+                    <div class="order-b__label">Ваш телефон</div>
+
+                    <div class="order-b__value">
+                      <input
+                        type="text"
+                        name="phone"
+                        class="input-text input-text_phone"
+                        placeholder="+7 (999) 999-99-99"
+                        value="{{user_phone}}"
+                        required
+                      />
+                    </div>
+                  </div>
+
+                  <div class="order-b__field">
+                    <input type="submit" class="button" value="Отправить" />
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="footer-b">
+        <div class="max-width">
+          <div class="footer-b__grid">
+            <div class="footer-b__logo">
+              <img src="static/img/content/logo.svg" alt="" /><span
+                >В центре событий</span
+              >
+            </div>
+            <div class="footer-b__menu">
+              <a href="https://m7tp.ru/" class="footer-b__links">Главная</a>
+              <a href="https://m7tp.ru/partners" class="footer-b__links"
+                >Магазины</a
+              >
+              <a href="https://m7tp.ru/contacts" class="footer-b__links"
+                >Контакты</a
+              >
+            </div>
+
+            <div class="footer-b__actions">
+              <a href="https://m7tp.ru/portal" class="button button_small"
+                >Портал арендатора</a
+              >
+              <a href="https://m7tp.ru/#appeal" class="button button_small"
+                >Обращение к руководителю</a
+              >
+              <a href="https://m7tp.ru/dealers" class="button button_small"
+                >Потенциальным арендаторам</a
+              >
+            </div>
+          </div>
+        </div>
+      </footer>
+
+      <script src="{% static 'static/js/mainv88g6bn.min.js' %}"></script>
+    </div>
+  </body>
+</html>
