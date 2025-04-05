@@ -10,7 +10,7 @@ DEBUG = False
 ALLOWED_HOSTS = ["*"]
 
 CSRF_TRUSTED_ORIGINS = [
-    "portal.m7tp.ru",
+    "https://portal.m7tp.ru",
 ]
 
 LOGOUT_REDIRECT_URL = "/"
