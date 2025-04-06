@@ -44,6 +44,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 class Pages(models.Model):
     page = models.CharField(max_length=255)
     content = RichTextField()
+    title = models.CharField(max_length=255, blank=True, null=True)
 
     class Meta:
         verbose_name = "Страницы"
