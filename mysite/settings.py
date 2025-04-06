@@ -84,7 +84,7 @@ PASSWORD_HASHERS = [
 
 
 AUTH_PASSWORD_VALIDATORS = [
-   
+
 ]
 
 
@@ -102,10 +102,10 @@ LOCALE_PATHS = (
 
 
 STATIC_URL = "/static/"
-STATIC_ROOT = '/var/www/portal/static/'
+STATIC_ROOT = '/var/www/staticfiles/'
 
 
-STATICFILES_DIRS = [
+STATICFILES_DIR = [
     os.path.join(BASE_DIR, "static"),
 ]
 

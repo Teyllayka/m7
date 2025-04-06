@@ -1,6 +1,7 @@
 from django.contrib.auth import login
 from django.shortcuts import get_object_or_404, render, redirect
 import requests
+from django.contrib import messages
 
 from website.models import  Pages
 from .forms import PasswordOnlyAuthenticationForm, SupportRequestForm
@@ -52,10 +53,12 @@ def application(request):
                 response = requests.post(url, data=params, timeout=10, verify=False)
                 response.raise_for_status() 
                 result = response.json()
-                print(result)  
+                print(result)
+                # Добавляем сообщение об успешной отправке
+                messages.success(request, "Заявка успешно отправлена")
                 return redirect("application")
-
             except requests.exceptions.RequestException as e:
+                messages.error(request, "Ошибка при отправке заявки")
                 return redirect("application")
        
 

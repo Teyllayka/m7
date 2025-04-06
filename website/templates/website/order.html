@@ -20,8 +20,45 @@
       href="{% static 'img/content/favicon.png' %}"
     />
   </head>
-
+  <style>
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 1000;
+    }
+    .modal-content {
+      background: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      text-align: center;
+      color: black;
+    }
+  </style>
   <body>
+    {% if messages %}
+    <div id="successModal" class="modal">
+      <div class="modal-content">
+        {% for message in messages %}
+        <p>{{ message }}</p>
+        {% endfor %}
+      </div>
+    </div>
+    <script>
+      setTimeout(function() {
+        var modal = document.getElementById('successModal');
+        if(modal) {
+          modal.style.display = 'none';
+        }
+      }, 3000);
+    </script>
+    {% endif %}
     <div class="wrapper">
       <header class="header-b">
         <div class="max-width">
@@ -114,6 +151,8 @@
                   method="post"
                   action="{% url 'application' %}"
                   enctype="multipart/form-data"
+                  id="supportRequestForm"
+
                 >
                   {% csrf_token %}
 
@@ -127,7 +166,6 @@
                           name="type"
                           id="type-1"
                           value="17"
-                          required
                         />
                         <label for="type-1">Вопрос в коммерческую службу</label>
                       </div>
@@ -138,7 +176,6 @@
                           name="type"
                           id="type-2"
                           value="18"
-                          required
                         />
                         <label for="type-2"
                           >Заявка на проведение технических работ</label
@@ -151,10 +188,12 @@
                           name="type"
                           id="type-3"
                           value="19"
-                          required
                         />
                         <label for="type-3">Письмо руководителю</label>
                       </div>
+                    </div>
+                    <div id="radio-error" style="color: red; display: none; margin-top: 5px;">
+                      Пожалуйста, выберите вариант.
                     </div>
                     <div class="order-b__value">
                       <textarea
@@ -233,8 +272,26 @@
           </div>
         </div>
       </footer>
-
+      <script>
+        document.getElementById("supportRequestForm").addEventListener("submit", function (e) {
+          var radios = document.getElementsByName("type");
+          var isChecked = false;
+          for (var i = 0; i < radios.length; i++) {
+            if (radios[i].checked) {
+              isChecked = true;
+              break;
+            }
+          }
+          if (!isChecked) {
+            e.preventDefault();
+            var errorTooltip = document.getElementById("radio-error");
+            errorTooltip.style.display = "block";
+          }
+        });
+      </script>
       <script src="{% static 'static/js/mainv88g6bn.min.js' %}"></script>
     </div>
+    
   </body>
 </html>
+
