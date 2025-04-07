@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import CustomUser, Pages
+from .models import CustomUser, Pages, Document
 from django.utils.html import format_html
 
 class CustomUserAdmin(UserAdmin):
@@ -24,6 +24,18 @@ class CustomUserAdmin(UserAdmin):
 admin.site.register(CustomUser, CustomUserAdmin)
 
 
+
+
+
 @admin.register(Pages)
 class PagesAdmin(admin.ModelAdmin):
     list_display = ('page', 'content')
+
+
+@admin.register(Document)
+class DocumentAdmin(admin.ModelAdmin):
+    list_display = ('page', 'file', 'uploaded_at')
+
+    def file_link(self, obj):
+        return format_html('<a href="{}">{}</a>', obj.file.url, obj.file.name)
+    file_link.short_description = 'File'

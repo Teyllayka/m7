@@ -54,7 +54,6 @@ def application(request):
                 response.raise_for_status() 
                 result = response.json()
                 print(result)
-                # Добавляем сообщение об успешной отправке
                 messages.success(request, "Заявка успешно отправлена")
                 return redirect("application")
             except requests.exceptions.RequestException as e:
